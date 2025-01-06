@@ -17,15 +17,18 @@ export const OfficeCanvas = ({
   desks = [],
 }: Omit<OfficeCanvasProps, "width" | "height">) => {
   const canvasRef = useRef<HTMLDivElement>(null);
+  const appRef = useRef<PIXI.Application | null>(null);
+  const containerRef = useRef<PIXI.Container | null>(null);
 
   const scale = useZoomStore((state) => state.scale);
 
+  // 초기 렌더링 시 한 번만 실행되는 설정
   useEffect(() => {
     if (!canvasRef.current) return;
 
     const { width, height } = canvasRef.current.getBoundingClientRect();
 
-    const app = new PIXI.Application({
+    appRef.current = new PIXI.Application({
       width,
       height,
       backgroundColor: 0xffffff,
@@ -34,10 +37,30 @@ export const OfficeCanvas = ({
       autoDensity: true,
     });
 
-    const canvas = app.view as HTMLCanvasElement;
-
+    const canvas = appRef.current.view as HTMLCanvasElement;
     canvasRef.current.appendChild(canvas);
 
+    // 컨테이너 생성
+    containerRef.current = new PIXI.Container();
+    appRef.current.stage.addChild(containerRef.current);
+
+    // 그리드와 책상 그리기
+    drawGridAndDesks();
+
+    return () => {
+      if (appRef.current) {
+        appRef.current.destroy(true);
+      }
+    };
+  }, []);
+
+  // 그리드와 책상을 그리는 함수
+  const drawGridAndDesks = () => {
+    if (!appRef.current || !containerRef.current) return;
+
+    containerRef.current.removeChildren();
+
+    const { width, height } = appRef.current.screen;
     const cellWidth = 30;
     const cellHeight = 30;
 
@@ -59,7 +82,7 @@ export const OfficeCanvas = ({
       gridGraphics.lineTo(width, yPos);
     }
 
-    app.stage.addChild(gridGraphics);
+    containerRef.current.addChild(gridGraphics);
 
     // 책상 그리기
     desks.forEach((desk) => {
@@ -96,29 +119,26 @@ export const OfficeCanvas = ({
           deskY + deskHeight / 2 - text.height / 2
         );
 
-        app.stage.addChild(text);
-        app.stage.addChild(deskGraphics);
+        containerRef.current?.addChild(deskGraphics);
+        containerRef.current?.addChild(text);
       }
     });
+  };
 
-    // scale 적용
-    app.stage.scale.set(scale);
+  // scale이나 데이터가 변경될 때 실행
+  useEffect(() => {
+    if (!containerRef.current) return;
 
-    return () => {
-      app.destroy(true);
-    };
-  }, [rows, columns, desks, scale]);
+    // 컨테이너의 scale만 업데이트
+    containerRef.current.scale.set(scale);
+  }, [scale]);
 
-  return (
-    <div
-      ref={canvasRef}
-      className="w-full h-full overflow-auto"
-      style={{
-        position: "relative",
-        cursor: "grab", // 드래그 가능함을 표시
-      }}
-    />
-  );
+  // desks, rows, columns가 변경될 때 다시 그리기
+  useEffect(() => {
+    drawGridAndDesks();
+  }, [desks, rows, columns]);
+
+  return <div ref={canvasRef} className="w-full h-full overflow-auto" />;
 };
 
 export default OfficeCanvas;
