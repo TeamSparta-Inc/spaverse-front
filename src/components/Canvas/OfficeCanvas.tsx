@@ -1,126 +1,166 @@
-import { useRef, useEffect, useState } from "react";
-import { usePixiApp } from "../../hooks/usePixiApp";
-import { DeskGraphics } from "./Desk";
-import { Graphics } from "pixi.js";
-import { GRID_SIZE } from "../../utils/grid";
-import { Desk } from "../../models/desk";
-import { DeskMockData } from "../../data/search.mock";
+import { useEffect, useRef } from "react";
+import * as PIXI from "pixi.js";
+import { Desk } from "../../types/desk";
 
-export const OfficeCanvas = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const app = usePixiApp(800, 600);
-  const [desks, setDesks] = useState<Desk[]>(DeskMockData);
-  const gridRef = useRef<Graphics | null>(null);
+interface OfficeCanvasProps {
+  width?: number;
+  height?: number;
+  rows?: number;
+  columns?: number;
+  desks: Desk[]; // 책상 데이터 추가
+}
 
-  // 그리드 그리기 함수
-  const createGrid = () => {
-    const grid = new Graphics();
+export const OfficeCanvas = ({
+  width = 800,
+  height = 600,
+  rows = 12,
+  columns = 16,
+  desks = [],
+}: OfficeCanvasProps) => {
+  const canvasRef = useRef<HTMLDivElement>(null);
 
-    grid.beginFill(0xffffff);
-    grid.drawRect(0, 0, 800, 600);
-    grid.endFill();
-
-    grid.lineStyle(1, 0xe0e0e0);
-
-    for (let x = 0; x <= 800; x += GRID_SIZE) {
-      grid.moveTo(x, 0);
-      grid.lineTo(x, 600);
-
-      if (x % (GRID_SIZE * 5) === 0) {
-        grid.lineStyle(1, 0xcccccc);
-        grid.moveTo(x, 0);
-        grid.lineTo(x, 600);
-        grid.lineStyle(1, 0xe0e0e0);
-      }
-    }
-
-    for (let y = 0; y <= 600; y += GRID_SIZE) {
-      grid.moveTo(0, y);
-      grid.lineTo(800, y);
-
-      if (y % (GRID_SIZE * 5) === 0) {
-        grid.lineStyle(1, 0xcccccc);
-        grid.moveTo(0, y);
-        grid.lineTo(800, y);
-        grid.lineStyle(1, 0xe0e0e0);
-      }
-    }
-
-    return grid;
-  };
-
-  // Pixi.js 앱 초기화
   useEffect(() => {
-    if (!app) return;
+    if (!canvasRef.current) return;
 
-    // 그리드 생성 및 추가
-    if (!gridRef.current) {
-      gridRef.current = createGrid();
-      app.stage.addChild(gridRef.current);
-    }
+    console.log("Canvas ref exists");
 
-    return () => {
-      if (gridRef.current) {
-        app.stage.removeChild(gridRef.current);
-        gridRef.current = null;
-      }
-    };
-  }, [app]);
-
-  // 책상들 관리
-  useEffect(() => {
-    if (!app) return;
-
-    // 기존 책상들 제거 (그리드는 유지)
-    app.stage.children.slice(1).forEach((child) => {
-      app.stage.removeChild(child);
+    const app = new PIXI.Application({
+      width,
+      height,
+      backgroundColor: 0xffffff,
+      antialias: true,
+      resolution: window.devicePixelRatio || 1,
+      autoDensity: true,
     });
 
-    // 책상들 다시 그리기
+    const canvas = app.view as HTMLCanvasElement;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+
+    canvasRef.current.appendChild(canvas);
+
+    const cellWidth = width / columns;
+    const cellHeight = height / rows;
+
+    // 그리드 그리기
+    const gridGraphics = new PIXI.Graphics();
+
+    // 그리드 라인
+    gridGraphics.lineStyle(1, 0xdddddd);
+
+    // 수직선과 열 번호
+    for (let x = 0; x <= columns; x++) {
+      const xPos = x * cellWidth;
+      gridGraphics.moveTo(xPos, 0);
+      gridGraphics.lineTo(xPos, height);
+
+      // 열 번호 (간격 동적 조정)
+      const columnLabelInterval = Math.max(1, Math.floor(columns / 20)); // 전체 열을 최대 20개 구간으로
+      if (x % columnLabelInterval === 0) {
+        const text = new PIXI.Text(x.toString(), {
+          fontSize: Math.max(8, Math.min(10, cellWidth / 3)), // 셀 크기에 따라 폰트 크기 조정
+          fill: 0x999999,
+        });
+        text.position.set(xPos + 2, 2);
+        app.stage.addChild(text);
+      }
+    }
+
+    // 수평선과 행 번호
+    for (let y = 0; y <= rows; y++) {
+      const yPos = y * cellHeight;
+      gridGraphics.moveTo(0, yPos);
+      gridGraphics.lineTo(width, yPos);
+
+      // 행 번호 (간격 동적 조정)
+      const rowLabelInterval = Math.max(1, Math.floor(rows / 20)); // 전체 행을 최대 20개 구간으로
+      if (y % rowLabelInterval === 0) {
+        const text = new PIXI.Text(y.toString(), {
+          fontSize: Math.max(8, Math.min(10, cellHeight / 3)), // 셀 크기에 따라 폰트 크기 조정
+          fill: 0x999999,
+        });
+        text.position.set(2, yPos + 2);
+        app.stage.addChild(text);
+      }
+    }
+
+    app.stage.addChild(gridGraphics);
+
+    // 책상 그리기
     desks.forEach((desk) => {
-      const deskGraphics = new DeskGraphics(desk);
-      app.stage.addChild(deskGraphics);
-    });
-  }, [app, desks]);
+      const deskGraphics = new PIXI.Graphics();
 
-  // DOM에 캔버스 추가
-  useEffect(() => {
-    if (containerRef.current && app) {
-      containerRef.current.appendChild(app.view as HTMLCanvasElement);
-    }
+      const deskX = (desk.position.x - 3) * cellWidth;
+      const deskY = desk.position.y * cellHeight;
+      const deskWidth = 3 * cellWidth;
+      const deskHeight = 2 * cellHeight;
+
+      // 책상 크기가 너무 작지 않도록 최소 크기 설정
+      if (deskWidth >= 15 && deskHeight >= 10) {
+        // 최소 크기 조건
+        // 책상 그리기
+        deskGraphics.beginFill(0x4a90e2, 0.8);
+        deskGraphics.lineStyle(Math.max(1, cellWidth / 30), 0x2171c7); // 선 두께 동적 조정
+        deskGraphics.drawRect(deskX, deskY, deskWidth, deskHeight);
+        deskGraphics.endFill();
+
+        // 책상 정보 표시 (좌표 포함)
+        const fontSize = Math.max(8, Math.min(12, deskWidth / 8)); // 폰트 크기 동적 조정
+        const info = `${desk.occupant || "Empty"}\n(${desk.position.x - 3},${
+          desk.position.y
+        })`;
+        const text = new PIXI.Text(info, {
+          fontSize,
+          fill: 0x333333,
+          fontFamily: "Arial",
+          align: "center",
+        });
+
+        text.position.set(
+          deskX + deskWidth / 2 - text.width / 2,
+          deskY + deskHeight / 2 - text.height / 2
+        );
+
+        app.stage.addChild(text);
+        app.stage.addChild(deskGraphics);
+      }
+    });
+
+    // 캔버스 크기 정보 표시
+    const fontSize = Math.max(8, Math.min(12, width / 100)); // 폰트 크기 동적 조정
+    const sizeInfo = new PIXI.Text(
+      `Grid: ${columns}x${rows}\nSize: ${width}x${height}`,
+      {
+        fontSize,
+        fill: 0x666666,
+        fontFamily: "Arial",
+      }
+    );
+    sizeInfo.position.set(
+      width - sizeInfo.width - 10,
+      height - sizeInfo.height - 10
+    );
+    app.stage.addChild(sizeInfo);
 
     return () => {
-      if (containerRef.current && app) {
-        containerRef.current.removeChild(app.view as HTMLCanvasElement);
-      }
+      app.destroy(true);
     };
-  }, [app]);
-
-  const handleAddDesk = () => {
-    const newDesk: Desk = {
-      id: `desk${desks.length + 1}`,
-      x: GRID_SIZE * 2,
-      y: GRID_SIZE * 2,
-      width: GRID_SIZE * 2,
-      height: GRID_SIZE,
-      name: `새 책상 ${desks.length + 1}`,
-    };
-    setDesks([...desks, newDesk]);
-  };
+  }, [width, height, rows, columns, desks]);
 
   return (
-    <div className="relative flex flex-col items-center gap-4">
-      <div
-        ref={containerRef}
-        className="border-2 border-gray-300 rounded-lg shadow-lg"
-        style={{ width: "800px", height: "600px" }}
-      />
-      <button
-        onClick={handleAddDesk}
-        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-      >
-        책상 추가
-      </button>
-    </div>
+    <div
+      ref={canvasRef}
+      style={{
+        width: `${width}px`,
+        height: `${height}px`,
+        border: "1px solid #ccc",
+        position: "relative",
+        overflow: "hidden",
+        display: "block",
+        margin: "0 auto",
+      }}
+    />
   );
 };
+
+export default OfficeCanvas;
