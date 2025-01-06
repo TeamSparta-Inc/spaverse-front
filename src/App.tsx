@@ -1,10 +1,11 @@
-import { OfficeCanvas } from "./components/Canvas/OfficeCanvas";
+import { RouterProvider } from "react-router-dom";
 import { Container } from "./components/Layout/Container";
+import { router } from "./routes/router";
 
 function App() {
   return (
     <Container>
-      <OfficeCanvas />
+      <RouterProvider router={router} />
     </Container>
   );
 }
