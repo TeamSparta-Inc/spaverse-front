@@ -1,15 +1,15 @@
 import { useRef, useEffect, useState } from "react";
 import { usePixiApp } from "../../hooks/usePixiApp";
 import { DeskGraphics } from "./Desk";
-import { initialDesks } from "../../store/office";
 import { Graphics } from "pixi.js";
 import { GRID_SIZE } from "../../utils/grid";
 import { Desk } from "../../models/desk";
+import { DeskMockData } from "../../data/search.mock";
 
 export const OfficeCanvas = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const app = usePixiApp(800, 600);
-  const [desks, setDesks] = useState<Desk[]>(initialDesks);
+  const [desks, setDesks] = useState<Desk[]>(DeskMockData);
   const gridRef = useRef<Graphics | null>(null);
 
   // 그리드 그리기 함수
@@ -109,7 +109,7 @@ export const OfficeCanvas = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="relative flex flex-col items-center gap-4">
       <div
         ref={containerRef}
         className="border-2 border-gray-300 rounded-lg shadow-lg"
