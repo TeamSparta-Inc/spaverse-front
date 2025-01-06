@@ -1,4 +1,4 @@
-import { GridPosition } from "../models/desk";
+import { GridPosition } from "../types/desk";
 
 export const GRID_SIZE = 40; // 그리드 한 칸의 크기
 

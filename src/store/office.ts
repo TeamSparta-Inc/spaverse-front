@@ -1,28 +1,28 @@
-import { Desk } from "../models/desk";
+import { Desk } from "../types/desk";
 
 export const initialDesks: Desk[] = [
   {
     id: "desk1",
-    x: 40,
-    y: 40,
-    width: 80,
-    height: 40,
-    name: "김철수",
+    position: {
+      x: 0,
+      y: 0,
+    },
+    occupant: "김철수",
   },
   {
     id: "desk2",
-    x: 160,
-    y: 40,
-    width: 80,
-    height: 40,
-    name: "이영희",
+    position: {
+      x: 0,
+      y: 0,
+    },
+    occupant: "이영희",
   },
   {
     id: "desk3",
-    x: 40,
-    y: 120,
-    width: 80,
-    height: 40,
-    name: "박지성",
+    position: {
+      x: 0,
+      y: 0,
+    },
+    occupant: "박지성",
   },
 ];
