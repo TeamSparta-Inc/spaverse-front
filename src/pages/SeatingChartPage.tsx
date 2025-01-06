@@ -1,7 +1,7 @@
 import { OfficeCanvas } from "../components/Canvas/OfficeCanvas";
 import { Gnb } from "../components/Layout/Gnb";
 import { Lnb } from "../components/Layout/Lnb";
-import { ZoomControls } from "../components/Layout/ZoomContorls";
+import { ZoomControls } from "../components/Layout/ZoomControls";
 import { sampleDesks } from "../data/sampleDesks";
 
 export const SeatingChartPage = () => {

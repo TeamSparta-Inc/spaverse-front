@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as PIXI from "pixi.js";
 import { Desk } from "../../types/desk";
+import { useZoomStore } from "../../store/useZoomStore";
 
 interface OfficeCanvasProps {
   width?: number;
@@ -14,8 +15,10 @@ export const OfficeCanvas = ({
   rows = 12,
   columns = 16,
   desks = [],
-}: OfficeCanvasProps) => {
+}: Omit<OfficeCanvasProps, "width" | "height">) => {
   const canvasRef = useRef<HTMLDivElement>(null);
+
+  const scale = useZoomStore((state) => state.scale);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -35,8 +38,8 @@ export const OfficeCanvas = ({
 
     canvasRef.current.appendChild(canvas);
 
-    const cellWidth = width / columns;
-    const cellHeight = height / rows;
+    const cellWidth = 30;
+    const cellHeight = 30;
 
     // 그리드 그리기
     const gridGraphics = new PIXI.Graphics();
@@ -98,15 +101,22 @@ export const OfficeCanvas = ({
       }
     });
 
+    // scale 적용
+    app.stage.scale.set(scale);
+
     return () => {
       app.destroy(true);
     };
-  }, [rows, columns, desks]);
+  }, [rows, columns, desks, scale]);
 
   return (
     <div
       ref={canvasRef}
-      className="w-full h-full flex justify-center items-center overflow-auto"
+      className="w-full h-full overflow-auto"
+      style={{
+        position: "relative",
+        cursor: "grab", // 드래그 가능함을 표시
+      }}
     />
   );
 };
