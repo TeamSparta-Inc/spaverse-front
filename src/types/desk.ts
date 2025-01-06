@@ -7,3 +7,8 @@ export interface Desk {
   };
   occupant?: string; // 책상 사용자 이름 (선택)
 }
+
+export interface GridPosition {
+  row: number;
+  col: number;
+}
