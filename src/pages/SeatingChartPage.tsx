@@ -6,21 +6,15 @@ import { sampleDesks } from "../data/sampleDesks";
 
 export const SeatingChartPage = () => {
   return (
-    <div className="flex flex-col w-screen min-h-screen p-0 m-0">
+    <div className="flex flex-col w-screen min-h-dvh p-0 m-0">
       <Gnb />
-      <Lnb desks={sampleDesks} onDeskSelect={() => {}} />
-      <OfficeCanvas
-        // width={1258}
-        // height={2482}
-        // columns={37}
-        // rows={73}
-        width={500}
-        height={900}
-        columns={37}
-        rows={73}
-        desks={sampleDesks}
-      />
-      <ZoomControls />
+      <div className="flex flex-1 relative">
+        <Lnb desks={sampleDesks} onDeskSelect={() => {}} />
+        <div className="flex-1 relative">
+          <OfficeCanvas columns={37} rows={73} desks={sampleDesks} />
+        </div>
+        <ZoomControls />
+      </div>
     </div>
   );
 };
