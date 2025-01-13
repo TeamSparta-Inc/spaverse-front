@@ -65,7 +65,7 @@ export const OfficeCanvas = ({
     drawGridAndDesks();
   }, [desks, rows, columns]);
 
-  return <div ref={canvasRef} className="w-full h-full overflow-auto" />;
+  return <div ref={canvasRef} className="p-10 w-full h-full overflow-auto" />;
 };
 
 export default OfficeCanvas;
