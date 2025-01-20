@@ -1,5 +1,5 @@
 import * as PIXI from "pixi.js";
-import { Desk } from "../types/desk";
+import { Desk, Team } from "../types/desk";
 import { CANVAS_CONSTANTS } from "../constants/canvas";
 
 export const drawGrid = (
@@ -28,10 +28,12 @@ export const drawGrid = (
   }
 };
 
-export const createDeskGraphics = (desk: Desk): PIXI.Graphics => {
+export const createDeskGraphics = (desk: Desk): PIXI.Container => {
   const { CELL_WIDTH, CELL_HEIGHT, COLORS } = CANVAS_CONSTANTS;
-  const deskGraphics = new PIXI.Graphics();
+  const container = new PIXI.Container();
 
+  // 책상 배경 그리기
+  const deskGraphics = new PIXI.Graphics();
   const deskX = (desk.position.x - 3) * CELL_WIDTH;
   const deskY = desk.position.y * CELL_HEIGHT;
   const deskWidth = 3 * CELL_WIDTH;
@@ -42,7 +44,26 @@ export const createDeskGraphics = (desk: Desk): PIXI.Graphics => {
   deskGraphics.drawRect(deskX, deskY, deskWidth, deskHeight);
   deskGraphics.endFill();
 
-  return deskGraphics;
+  container.addChild(deskGraphics);
+
+  if (desk.occupant) {
+    const badge = new PIXI.Graphics();
+    const badgeRadius = 7;
+    const colors = TEAM_COLORS[desk.occupant.team];
+
+    badge.beginFill(colors.primary);
+    badge.lineStyle(1, colors.secondary);
+    badge.drawCircle(
+      deskX + badgeRadius + 10,
+      deskY + deskHeight / 2,
+      badgeRadius
+    );
+    badge.endFill();
+
+    container.addChild(badge);
+  }
+
+  return container;
 };
 
 export const createDeskText = (
@@ -74,3 +95,23 @@ export const createDeskText = (
 
   return text;
 };
+
+export const TEAM_COLORS: Record<Team, { primary: number; secondary: number }> =
+  {
+    "개발 팀": {
+      primary: 0x8fc9ff, // blue-40
+      secondary: 0x2998ff, // blue-60
+    },
+    "디자인 팀": {
+      primary: 0xb2a3ff, // purple-40
+      secondary: 0x846bff, // purple-60
+    },
+    "스코클 팀": {
+      primary: 0x96eb96, // green-40
+      secondary: 0x55d455, // green-60
+    },
+    "항해 팀": {
+      primary: 0xffbe8f, // orange-40
+      secondary: 0xff8026, // orange-60
+    },
+  };

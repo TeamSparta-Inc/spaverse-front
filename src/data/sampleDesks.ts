@@ -8,7 +8,7 @@ export const sampleDesks: Desk[] = [
       id: "1",
       name: "김철수",
       email: "kim@gmail.com",
-      team: "개발팀",
+      team: "개발 팀",
     },
   },
   {
@@ -82,7 +82,7 @@ export const sampleDesks: Desk[] = [
       id: "8",
       name: "송태호",
       email: "song@gmail.com",
-      team: "개발팀",
+      team: "개발 팀",
     },
   },
   {
@@ -92,7 +92,7 @@ export const sampleDesks: Desk[] = [
       id: "9",
       name: "임서연",
       email: "lim@gmail.com",
-      team: "개발팀",
+      team: "개발 팀",
     },
   },
   {
@@ -106,7 +106,7 @@ export const sampleDesks: Desk[] = [
       id: "10",
       name: "윤하은",
       email: "yoon@gmail.com",
-      team: "개발팀",
+      team: "개발 팀",
     },
   },
 ];
