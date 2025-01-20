@@ -58,7 +58,7 @@ export const createDeskText = (
     MIN_FONT_SIZE,
     Math.min(MAX_FONT_SIZE, deskWidth / 8)
   );
-  const text = new PIXI.Text(desk.occupant || "(공석)", {
+  const text = new PIXI.Text(desk.occupant?.name || "(공석)", {
     fontSize,
     fill: COLORS.TEXT,
     fontFamily: "Arial",

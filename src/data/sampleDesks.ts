@@ -1,24 +1,25 @@
 import { Desk } from "../types/desk";
+import { sampleUsers } from "./sampleUsers";
 
 export const sampleDesks: Desk[] = [
   {
     id: "desk1",
     position: { x: 3, y: 2 },
-    occupant: "김철수",
+    occupant: sampleUsers[0],
   },
   {
     id: "desk2",
     position: { x: 6, y: 2 },
-    occupant: "이영희",
+    occupant: sampleUsers[1],
   },
   {
     id: "desk3",
     position: { x: 3, y: 5 },
-    occupant: "박지민",
+    occupant: sampleUsers[2],
   },
   {
     id: "desk4",
     position: { x: 6, y: 5 },
-    occupant: "최동훈",
+    occupant: sampleUsers[3],
   },
 ];
