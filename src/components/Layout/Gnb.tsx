@@ -1,6 +1,6 @@
 export const Gnb = () => {
   return (
-    <nav className="w-full h-12 bg-white border-b border-gray-200 flex items-center px-4">
+    <nav className="sticky top-0 w-full h-12 bg-white border-b border-gray-200 flex items-center px-4 z-10">
       <div className="flex items-center justify-between w-full max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
           <img

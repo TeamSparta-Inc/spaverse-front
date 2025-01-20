@@ -16,6 +16,10 @@
     @apply m-0 min-h-screen;
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   a {
     @apply text-blue-600 hover:text-blue-700;
   }
