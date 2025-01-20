@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { SearchBar } from "./SearchBar";
 import { Desk } from "../../types/desk";
-import { vars } from "@teamsparta/stack-tokens";
+import { SearchBar } from "./SearchBar";
 
 interface LnbProps {
   desks: Desk[];

@@ -7,7 +7,12 @@ export const initialDesks: Desk[] = [
       x: 0,
       y: 0,
     },
-    occupant: "김철수",
+    occupant: {
+      id: "1",
+      name: "김철수",
+      email: "kim@example.com",
+      team: "개발 팀",
+    },
   },
   {
     id: "desk2",
@@ -15,7 +20,12 @@ export const initialDesks: Desk[] = [
       x: 0,
       y: 0,
     },
-    occupant: "이영희",
+    occupant: {
+      id: "2",
+      name: "이영희",
+      email: "lee@example.com",
+      team: "디자인 팀",
+    },
   },
   {
     id: "desk3",
@@ -23,6 +33,11 @@ export const initialDesks: Desk[] = [
       x: 0,
       y: 0,
     },
-    occupant: "박지성",
+    occupant: {
+      id: "3",
+      name: "박지성",
+      email: "park@example.com",
+      team: "스코클 팀",
+    },
   },
 ];
