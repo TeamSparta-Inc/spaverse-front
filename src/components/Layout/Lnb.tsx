@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SearchBar } from "./SearchBar";
 import { Desk } from "../../types/desk";
+import { vars } from "@teamsparta/stack-tokens";
 
 interface LnbProps {
   desks: Desk[];
@@ -11,7 +12,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   const [searchText, setSearchText] = useState("");
 
   const filteredDesks = desks.filter((desk) =>
-    desk.occupant?.toLowerCase().includes(searchText.toLowerCase())
+    desk.occupant?.name?.toLowerCase().includes(searchText.toLowerCase())
   );
   return (
     <div className="z-10">
@@ -46,7 +47,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
                 className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-[15px] leading-[22px] font-medium"
                 onClick={() => onDeskSelect(desk.id)}
               >
-                {desk.occupant}
+                {desk.occupant?.name}
               </div>
             ))}
           </div>
