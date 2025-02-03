@@ -37,20 +37,10 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
           value={searchText}
           onChange={(value) => setSearchText(value)}
           placeholder="팀원 이름으로 검색"
+          searchText={searchText}
+          filteredDesks={filteredDesks}
+          onDeskSelect={onDeskSelect}
         />
-        {searchText && (
-          <div className="">
-            {filteredDesks.map((desk) => (
-              <div
-                key={desk.id}
-                className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-[15px] leading-[22px] font-medium"
-                onClick={() => onDeskSelect(desk.id)}
-              >
-                {desk.occupant?.name}
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
