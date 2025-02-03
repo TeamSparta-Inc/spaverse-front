@@ -1,6 +1,7 @@
 import * as PIXI from "pixi.js";
 import { Desk, Team } from "../types/desk";
 import { CANVAS_CONSTANTS } from "../constants/canvas";
+import { Room } from "../types/room";
 
 export const drawGrid = (
   graphics: PIXI.Graphics,
@@ -115,3 +116,36 @@ export const TEAM_COLORS: Record<Team, { primary: number; secondary: number }> =
       secondary: 0xff8026, // orange-60
     },
   };
+
+export const createRoomGraphics = (room: Room): PIXI.Container => {
+  const { CELL_WIDTH, CELL_HEIGHT, COLORS } = CANVAS_CONSTANTS;
+  const container = new PIXI.Container();
+
+  // 방 배경 그리기
+  const roomGraphics = new PIXI.Graphics();
+  const roomX = room.position.x * CELL_WIDTH;
+  const roomY = room.position.y * CELL_HEIGHT;
+  const roomWidth = room.size.width * CELL_WIDTH;
+  const roomHeight = room.size.height * CELL_HEIGHT;
+
+  // 방 배경
+  roomGraphics.beginFill(COLORS.ROOM_FILL || 0xf6f9fa, 0.5); // neutral-5 with opacity
+  roomGraphics.lineStyle(2, COLORS.ROOM_STROKE || 0xd7e0e6); // neutral-30
+  roomGraphics.drawRect(roomX, roomY, roomWidth, roomHeight);
+  roomGraphics.endFill();
+
+  // 방 이름 텍스트
+  const text = new PIXI.Text(room.name, {
+    fontSize: 14,
+    fill: COLORS.TEXT,
+    fontFamily: "Arial",
+    align: "center",
+  });
+
+  text.position.set(roomX + roomWidth / 2 - text.width / 2, roomY + 10);
+
+  container.addChild(roomGraphics);
+  container.addChild(text);
+
+  return container;
+};

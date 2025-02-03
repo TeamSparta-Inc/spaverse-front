@@ -20,6 +20,8 @@ export const usePixiApp = (containerRef: React.RefObject<HTMLDivElement>) => {
     });
 
     const canvas = appRef.current.view as HTMLCanvasElement;
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
     containerRef.current.appendChild(canvas);
 
     pixiContainerRef.current = new PIXI.Container();

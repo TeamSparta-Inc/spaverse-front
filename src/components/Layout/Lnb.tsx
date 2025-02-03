@@ -8,6 +8,7 @@ interface LnbProps {
 }
 
 export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
+  return null;
   const [searchText, setSearchText] = useState("");
 
   const filteredDesks = desks.filter((desk) =>

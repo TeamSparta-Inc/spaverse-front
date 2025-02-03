@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
-import * as PIXI from "pixi.js";
-import { Desk } from "../../types/desk";
-import { useZoomStore } from "../../store/useZoomStore";
-import { usePixiApp } from "../../hooks/usePixiApp";
 import { CANVAS_CONSTANTS } from "../../constants/canvas";
+import { sampleRooms } from "../../data/sampleRooms";
+import { usePixiApp } from "../../hooks/usePixiApp";
+import { useZoomStore } from "../../store/useZoomStore";
+import { Desk } from "../../types/desk";
 import {
-  drawGrid,
   createDeskGraphics,
   createDeskText,
+  createRoomGraphics,
 } from "../../utils/canvasUtils";
 
 interface OfficeCanvasProps {
@@ -22,22 +22,21 @@ export const OfficeCanvas = ({
   desks = [],
 }: OfficeCanvasProps) => {
   const canvasRef = useRef<HTMLDivElement>(null);
-  const { appRef, pixiContainerRef } = usePixiApp(canvasRef);
+  const { pixiContainerRef } = usePixiApp(canvasRef);
   const scale = useZoomStore((state) => state.scale);
 
-  const drawGridAndDesks = () => {
-    if (!appRef.current || !pixiContainerRef.current) return;
-
+  const draw = () => {
+    if (!pixiContainerRef.current) return;
     pixiContainerRef.current.removeChildren();
 
-    const { width, height } = appRef.current.screen;
     const { CELL_WIDTH, CELL_HEIGHT, MIN_DESK_WIDTH, MIN_DESK_HEIGHT } =
       CANVAS_CONSTANTS;
 
-    // 그리드 그리기
-    const gridGraphics = new PIXI.Graphics();
-    drawGrid(gridGraphics, width, height, rows, columns);
-    pixiContainerRef.current.addChild(gridGraphics);
+    // 방 그리기
+    sampleRooms.forEach((room) => {
+      const roomGraphics = createRoomGraphics(room);
+      pixiContainerRef.current?.addChild(roomGraphics);
+    });
 
     // 책상 그리기
     desks.forEach((desk) => {
@@ -62,7 +61,7 @@ export const OfficeCanvas = ({
   }, [scale]);
 
   useEffect(() => {
-    drawGridAndDesks();
+    draw();
   }, [desks, rows, columns]);
 
   return <div ref={canvasRef} className="p-10 w-full h-full overflow-auto" />;
