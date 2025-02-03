@@ -28,7 +28,10 @@ export const drawGrid = (
   }
 };
 
-export const createDeskGraphics = (desk: Desk): PIXI.Container => {
+export const createDeskGraphics = (
+  desk: Desk,
+  isSelected: boolean
+): PIXI.Container => {
   const { CELL_WIDTH, CELL_HEIGHT, COLORS } = CANVAS_CONSTANTS;
   const container = new PIXI.Container();
 
@@ -39,8 +42,15 @@ export const createDeskGraphics = (desk: Desk): PIXI.Container => {
   const deskWidth = 3 * CELL_WIDTH;
   const deskHeight = 2 * CELL_HEIGHT;
 
-  deskGraphics.beginFill(COLORS.DESK_FILL, 0.8);
-  deskGraphics.lineStyle(Math.max(1, CELL_WIDTH / 30), COLORS.DESK_STROKE);
+  // 선택된 책상일 경우 다른 색상 적용
+  const fillColor = isSelected ? 0xffe082 : COLORS.DESK_FILL;
+  const strokeColor = isSelected ? 0xffa000 : COLORS.DESK_STROKE;
+  const strokeWidth = isSelected
+    ? Math.max(2, CELL_WIDTH / 20)
+    : Math.max(1, CELL_WIDTH / 30);
+
+  deskGraphics.beginFill(fillColor, 0.8);
+  deskGraphics.lineStyle(strokeWidth, strokeColor);
   deskGraphics.drawRect(deskX, deskY, deskWidth, deskHeight);
   deskGraphics.endFill();
 

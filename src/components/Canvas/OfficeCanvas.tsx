@@ -14,16 +14,22 @@ interface OfficeCanvasProps {
   rows?: number;
   columns?: number;
   desks: Desk[];
+  selectedDeskId?: string | null;
 }
 
 export const OfficeCanvas = ({
   rows = 12,
   columns = 16,
   desks = [],
+  selectedDeskId,
 }: OfficeCanvasProps) => {
   const canvasRef = useRef<HTMLDivElement>(null);
   const { appRef, pixiContainerRef } = usePixiApp(canvasRef);
   const scale = useZoomStore((state) => state.scale);
+
+  useEffect(() => {
+    drawGridAndDesks();
+  }, [desks, rows, columns, selectedDeskId]); // selectedDeskId 추가
 
   const drawGridAndDesks = () => {
     if (!appRef.current || !pixiContainerRef.current) return;
@@ -41,13 +47,14 @@ export const OfficeCanvas = ({
 
     // 책상 그리기
     desks.forEach((desk) => {
+      const isSelected = desk.id === selectedDeskId;
       const deskX = (desk.position.x - 3) * CELL_WIDTH;
       const deskY = desk.position.y * CELL_HEIGHT;
       const deskWidth = 3 * CELL_WIDTH;
       const deskHeight = 2 * CELL_HEIGHT;
 
       if (deskWidth >= MIN_DESK_WIDTH && deskHeight >= MIN_DESK_HEIGHT) {
-        const deskGraphics = createDeskGraphics(desk);
+        const deskGraphics = createDeskGraphics(desk, isSelected);
         const text = createDeskText(desk, deskX, deskY, deskWidth, deskHeight);
 
         pixiContainerRef.current?.addChild(deskGraphics);
