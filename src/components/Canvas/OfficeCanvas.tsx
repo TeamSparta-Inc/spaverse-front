@@ -27,11 +27,7 @@ export const OfficeCanvas = ({
   const { appRef, pixiContainerRef } = usePixiApp(canvasRef);
   const scale = useZoomStore((state) => state.scale);
 
-  useEffect(() => {
-    drawGridAndDesks();
-  }, [desks, rows, columns, selectedDeskId]); // selectedDeskId 추가
-
-  const drawGridAndDesks = () => {
+  const draw = () => {
     if (!appRef.current || !pixiContainerRef.current) return;
 
     pixiContainerRef.current.removeChildren();
@@ -69,8 +65,8 @@ export const OfficeCanvas = ({
   }, [scale]);
 
   useEffect(() => {
-    drawGridAndDesks();
-  }, [desks, rows, columns]);
+    draw();
+  }, [desks, rows, columns, selectedDeskId]);
 
   return <div ref={canvasRef} className="p-10 w-full h-full overflow-auto" />;
 };
