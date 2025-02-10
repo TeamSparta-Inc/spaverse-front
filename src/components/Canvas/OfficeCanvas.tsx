@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CANVAS_CONSTANTS } from "../../constants/canvas";
 import { sampleRooms } from "../../data/sampleRooms";
 import { usePixiApp } from "../../hooks/usePixiApp";
@@ -9,6 +9,7 @@ import {
   createDeskText,
   createRoomGraphics,
 } from "../../utils/canvasUtils";
+import { DeskTooltip } from "../Tooltip/DeskTooltip";
 
 interface OfficeCanvasProps {
   rows?: number;
@@ -23,8 +24,22 @@ export const OfficeCanvas = ({
   desks = [],
   selectedDeskId,
 }: OfficeCanvasProps) => {
-  const canvasRef = useRef<HTMLDivElement>(null);
-  const { appRef, pixiContainerRef } = usePixiApp(canvasRef);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [tooltipState, setTooltipState] = useState<{
+    show: boolean;
+    position: { x: number; y: number };
+    desk: Desk | null;
+  }>({
+    show: false,
+    position: { x: 0, y: 0 },
+    desk: null,
+  });
+
+  const { appRef, pixiContainerRef, handleDeskClick } = usePixiApp(
+    containerRef,
+    setTooltipState
+  );
+
   const scale = useZoomStore((state) => state.scale);
 
   const draw = () => {
@@ -50,13 +65,26 @@ export const OfficeCanvas = ({
       const deskHeight = 2 * CELL_HEIGHT;
 
       if (deskWidth >= MIN_DESK_WIDTH && deskHeight >= MIN_DESK_HEIGHT) {
-        const deskGraphics = createDeskGraphics(desk, isSelected);
+        const deskGraphics = createDeskWithEvents(desk);
         const text = createDeskText(desk, deskX, deskY, deskWidth, deskHeight);
 
         pixiContainerRef.current?.addChild(deskGraphics);
         pixiContainerRef.current?.addChild(text);
       }
     });
+  };
+
+  // desk graphics 생성 시 클릭 이벤트 추가
+  const createDeskWithEvents = (desk: Desk) => {
+    const deskContainer = createDeskGraphics(desk, true);
+
+    if (desk.occupant) {
+      deskContainer.eventMode = "static";
+      deskContainer.cursor = "pointer";
+      deskContainer.on("click", (event) => handleDeskClick(event, desk));
+    }
+
+    return deskContainer;
   };
 
   useEffect(() => {
@@ -68,7 +96,17 @@ export const OfficeCanvas = ({
     draw();
   }, [desks, rows, columns, selectedDeskId]);
 
-  return <div ref={canvasRef} className="p-10 w-full h-full overflow-auto" />;
+  return (
+    <div ref={containerRef} className="relative w-full h-full">
+      {tooltipState.show && tooltipState.desk?.occupant && (
+        <DeskTooltip
+          occupant={tooltipState.desk.occupant}
+          position={tooltipState.position}
+          onClose={() => setTooltipState((prev) => ({ ...prev, show: false }))}
+        />
+      )}
+    </div>
+  );
 };
 
 export default OfficeCanvas;

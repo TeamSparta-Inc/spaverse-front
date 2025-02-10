@@ -1,13 +1,44 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import * as PIXI from "pixi.js";
+import { Desk } from "../types/desk";
 
-export const usePixiApp = (containerRef: React.RefObject<HTMLDivElement>) => {
+interface TooltipState {
+  show: boolean;
+  position: { x: number; y: number };
+  desk: Desk | null;
+}
+
+export const usePixiApp = (
+  containerRef: React.RefObject<HTMLDivElement>,
+  onDeskClick?: (tooltipState: TooltipState) => void
+) => {
   const appRef = useRef<PIXI.Application | null>(null);
   const pixiContainerRef = useRef<PIXI.Container | null>(null);
 
   // 드래그 상태를 추적하기 위한 refs
   const isDraggingRef = useRef(false);
   const lastPositionRef = useRef({ x: 0, y: 0 });
+
+  // 데스크 클릭 핸들러
+  const handleDeskClick = useCallback(
+    (event: PIXI.FederatedPointerEvent, desk: Desk) => {
+      if (isDraggingRef.current || !onDeskClick) return;
+
+      const bounds = containerRef.current?.getBoundingClientRect();
+      if (!bounds) return;
+
+      // 클릭 위치 계산
+      const x = event.clientX;
+      const y = event.clientY;
+
+      onDeskClick({
+        show: true,
+        position: { x, y },
+        desk,
+      });
+    },
+    [onDeskClick]
+  );
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -90,5 +121,9 @@ export const usePixiApp = (containerRef: React.RefObject<HTMLDivElement>) => {
     };
   }, []);
 
-  return { appRef, pixiContainerRef };
+  return {
+    appRef,
+    pixiContainerRef,
+    handleDeskClick,
+  };
 };
