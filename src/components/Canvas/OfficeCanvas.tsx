@@ -76,7 +76,8 @@ export const OfficeCanvas = ({
 
   // desk graphics 생성 시 클릭 이벤트 추가
   const createDeskWithEvents = (desk: Desk) => {
-    const deskContainer = createDeskGraphics(desk, true);
+    const isSelected = desk.id === selectedDeskId;
+    const deskContainer = createDeskGraphics(desk, isSelected);
 
     if (desk.occupant) {
       deskContainer.eventMode = "static";
