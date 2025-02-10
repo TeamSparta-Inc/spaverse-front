@@ -7,7 +7,7 @@ interface SearchBarProps {
   searchText: string;
   placeholder?: string;
   filteredDesks: Desk[];
-  onDeskSelect: (deskId: string) => void;
+  onDeskSelect: (desk: Desk, event: React.MouseEvent) => void;
 }
 
 export const SearchBar = ({
@@ -32,7 +32,7 @@ export const SearchBar = ({
             <div
               key={desk.id}
               className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-[15px] leading-[22px] font-medium"
-              onClick={() => onDeskSelect(desk.id)}
+              onClick={(event) => onDeskSelect(desk, event)}
             >
               {desk.occupant?.name}{" "}
               <span className="text-[#81898F]">| {desk.occupant?.team}</span>

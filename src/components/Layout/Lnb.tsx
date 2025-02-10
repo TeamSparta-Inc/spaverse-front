@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Desk } from "../../types/desk";
 import { SearchBar } from "./SearchBar";
+import { DeskTooltip } from "../Tooltip/DeskTooltip";
 
 interface LnbProps {
   desks: Desk[];
@@ -9,6 +10,15 @@ interface LnbProps {
 
 export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   const [searchText, setSearchText] = useState("");
+  const [tooltipState, setTooltipState] = useState<{
+    show: boolean;
+    position: { x: number; y: number };
+    desk: Desk | null;
+  }>({
+    show: false,
+    position: { x: 0, y: 0 },
+    desk: null,
+  });
 
   const filteredDesks = desks.filter((desk) => {
     const searchLower = searchText.toLowerCase();
@@ -17,6 +27,17 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
       desk.occupant?.team?.toLowerCase().includes(searchLower)
     );
   });
+
+  const handleDeskClick = (desk: Desk, event: React.MouseEvent) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setTooltipState({
+      show: true,
+      position: { x: rect.right + 10, y: rect.top },
+      desk,
+    });
+    onDeskSelect(desk.id);
+  };
+
   return (
     <div className="z-10">
       <button className="absolute left-4 top-[80px] w-[200px] flex justify-center items-center px-4 py-3 gap-1.5 rounded-md bg-slate-700 text-white shadow-[0px_8px_24px_0px_rgba(0,0,0,0.08),0px_0px_4px_0px_rgba(0,0,0,0.12)] text-[15px] leading-[22px] font-bold">
@@ -43,9 +64,16 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
           placeholder="팀/이름으로 검색"
           searchText={searchText}
           filteredDesks={filteredDesks}
-          onDeskSelect={onDeskSelect}
+          onDeskSelect={(desk, event) => handleDeskClick(desk, event)}
         />
       </div>
+      {tooltipState.show && tooltipState.desk?.occupant && (
+        <DeskTooltip
+          occupant={tooltipState.desk.occupant}
+          position={tooltipState.position}
+          onClose={() => setTooltipState((prev) => ({ ...prev, show: false }))}
+        />
+      )}
     </div>
   );
 };
