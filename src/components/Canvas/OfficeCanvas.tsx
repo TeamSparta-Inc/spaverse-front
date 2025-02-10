@@ -58,7 +58,7 @@ export const OfficeCanvas = ({
 
     // 책상 그리기
     desks.forEach((desk) => {
-      const isSelected = desk.id === selectedDeskId;
+      // const isSelected = desk.id === selectedDeskId;
       const deskX = (desk.position.x - 3) * CELL_WIDTH;
       const deskY = desk.position.y * CELL_HEIGHT;
       const deskWidth = 3 * CELL_WIDTH;
