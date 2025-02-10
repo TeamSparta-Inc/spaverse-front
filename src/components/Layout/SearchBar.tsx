@@ -34,7 +34,8 @@ export const SearchBar = ({
               className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-[15px] leading-[22px] font-medium"
               onClick={() => onDeskSelect(desk.id)}
             >
-              {desk.occupant?.name}
+              {desk.occupant?.name}{" "}
+              <span className="text-[#81898F]">| {desk.occupant?.team}</span>
             </div>
           ))}
         </div>

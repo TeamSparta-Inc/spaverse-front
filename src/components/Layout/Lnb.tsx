@@ -10,9 +10,13 @@ interface LnbProps {
 export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   const [searchText, setSearchText] = useState("");
 
-  const filteredDesks = desks.filter((desk) =>
-    desk.occupant?.name?.toLowerCase().includes(searchText.toLowerCase())
-  );
+  const filteredDesks = desks.filter((desk) => {
+    const searchLower = searchText.toLowerCase();
+    return (
+      desk.occupant?.name?.toLowerCase().includes(searchLower) ||
+      desk.occupant?.team?.toLowerCase().includes(searchLower)
+    );
+  });
   return (
     <div className="z-10">
       <button className="absolute left-4 top-[80px] w-[200px] flex justify-center items-center px-4 py-3 gap-1.5 rounded-md bg-slate-700 text-white shadow-[0px_8px_24px_0px_rgba(0,0,0,0.08),0px_0px_4px_0px_rgba(0,0,0,0.12)] text-[15px] leading-[22px] font-bold">
@@ -36,7 +40,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
         <SearchBar
           value={searchText}
           onChange={(value) => setSearchText(value)}
-          placeholder="팀원 이름으로 검색"
+          placeholder="팀/이름으로 검색"
           searchText={searchText}
           filteredDesks={filteredDesks}
           onDeskSelect={onDeskSelect}
