@@ -4,10 +4,13 @@ import { Lnb } from "../components/Layout/Lnb";
 import { ZoomControls } from "../components/Layout/ZoomControls";
 import { sampleDesks } from "../data/sampleDesks";
 import { useZoomStore } from "../store/useZoomStore";
-
+import { useParams } from "react-router-dom";
 export const SeatingChartPage = () => {
+  const { officeName } = useParams();
   const [selectedDeskId, setSelectedDeskId] = useState<string | null>(null);
   const setScale = useZoomStore((state) => state.setScale);
+
+  console.log(officeName);
 
   const handleDeskSelect = (deskId: string) => {
     setSelectedDeskId(deskId);

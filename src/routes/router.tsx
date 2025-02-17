@@ -1,28 +1,35 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Link,
+  Navigate,
   Route,
 } from "react-router-dom";
 import { DefaultLayout } from "../components/Layout/DefaultLayout";
-import { AdminPage } from "../pages/AdminPage";
 import { SeatingChartPage } from "../pages/SeatingChartPage";
+import { isValidOffice } from "../constants/offices";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route element={<DefaultLayout />}>
-        <Route path="/seating-chart" element={<SeatingChartPage />} />
-        <Route path="/admin" element={<AdminPage />} />
+        <Route
+          path="/seating-chart/:officeName" 
+          element={<SeatingChartPage />}
+          loader={({ params }) => {
+            if (!params.officeName || !isValidOffice(params.officeName)) {
+              throw new Response("", {
+                status: 404,
+                statusText: "Invalid Office",
+              });
+            }
+            return null;
+          }}
+          errorElement={<Navigate to="/seating-chart/HQ12" replace />}
+        />
       </Route>
       <Route
         path="/"
-        element={
-          <div className="flex flex-col items-center justify-center h-dvh gap-2">
-            <Link to="/seating-chart">좌석 배치도로 가기</Link>
-            <Link to="/admin">관리자 페이지로 가기</Link>
-          </div>
-        }
+        element={<Navigate to="/seating-chart/HQ12" replace />}
       />
     </>
   )
