@@ -7,7 +7,7 @@ export const Gnb = () => {
         </div>
         <div className="flex items-center gap-4">
           <button className="flex w-[104px] px-3 py-2 justify-center items-center gap-2.5 rounded-md bg-slate-100 text-gray-600 hover:text-gray-900 text-[15px] leading-[22px] font-bold">
-            팀 정보 편집
+            자리 바꾸기
           </button>
         </div>
       </div>

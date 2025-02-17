@@ -4,7 +4,7 @@ import { SearchBar } from "./SearchBar";
 import { DeskTooltip } from "../Tooltip/DeskTooltip";
 import { OfficeName } from "../../constants/offices";
 import { useNavigate, useLocation } from "react-router-dom";
-import { CheckOutlined } from '@ant-design/icons';
+import { CheckOutlined } from "@ant-design/icons";
 
 interface LnbProps {
   desks: Desk[];
@@ -12,10 +12,10 @@ interface LnbProps {
 }
 
 const OFFICE_NAMES: { id: OfficeName; label: string }[] = [
-  { id: 'HQ12', label: '본진 12층' },
-  { id: 'HQ13', label: '본진 13층' },
-  { id: 'FF9', label: '패스트파이브 9층' },
-  { id: 'FF10', label: '패스트파이브 10층' },
+  { id: "HQ12", label: "본진 12층" },
+  { id: "HQ13", label: "본진 13층" },
+  { id: "FF9", label: "패스트파이브 9층" },
+  { id: "FF10", label: "패스트파이브 10층" },
 ];
 
 export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
@@ -31,11 +31,13 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
     position: { x: 0, y: 0 },
     desk: null,
   });
-  const [selectedOffice, setSelectedOffice] = useState<OfficeName | null>(() => {
-    const path = location.pathname;
-    const match = path.match(/\/seating-chart\/(HQ12|HQ13|FF9)/);
-    return match ? match[1] as OfficeName : null;
-  });
+  const [selectedOffice, setSelectedOffice] = useState<OfficeName | null>(
+    () => {
+      const path = location.pathname;
+      const match = path.match(/\/seating-chart\/(HQ12|HQ13|FF9)/);
+      return match ? (match[1] as OfficeName) : null;
+    }
+  );
 
   const filteredDesks = desks.filter((desk) => {
     const searchLower = searchText.toLowerCase();
@@ -58,33 +60,33 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   const handleOfficeClick = (office: OfficeName) => {
     setSelectedOffice(office);
     navigate(`/seating-chart/${office}`);
-  }
+  };
 
   return (
     <div className="z-10">
-      <button className="absolute left-4 top-[80px] w-[200px] flex justify-center items-center px-4 py-3 gap-1.5 rounded-md bg-slate-700 text-white shadow-[0px_8px_24px_0px_rgba(0,0,0,0.08),0px_0px_4px_0px_rgba(0,0,0,0.12)] text-[15px] leading-[22px] font-bold">
-        자리 바꾸기
-      </button>
-
-      <div className="absolute left-4 top-[140px] w-[200px] bg-white rounded-lg shadow-lg">
+      <div className="absolute left-4 w-[200px] bg-white rounded-lg shadow-lg">
         <div className="flex flex-col">
           {OFFICE_NAMES.map((office, index) => (
-            <div 
+            <div
               key={office.id}
-              onClick={() => handleOfficeClick(office.id)} 
+              onClick={() => handleOfficeClick(office.id)}
               className={`p-4 text-[15px] hover:bg-gray-50 cursor-pointer ${
-                index !== OFFICE_NAMES.length - 1 ? 'border-b border-gray-200' : ''
+                index !== OFFICE_NAMES.length - 1
+                  ? "border-b border-gray-200"
+                  : ""
               } font-[15px] leading-[22px] flex justify-between items-center ${
-                selectedOffice === office.id ? 'text-red-500' : 'text-[#81898F]'
+                selectedOffice === office.id ? "text-red-500" : "text-[#81898F]"
               }`}
             >
               <span>{office.label}</span>
-              {selectedOffice === office.id && <CheckOutlined className="text-red-500" />}
+              {selectedOffice === office.id && (
+                <CheckOutlined className="text-red-500" />
+              )}
             </div>
           ))}
         </div>
       </div>
-      <div className="absolute left-4 top-[320px] w-[200px] bg-white rounded-lg shadow-lg">
+      <div className="absolute left-4 top-[230px] w-[200px] bg-white rounded-lg shadow-lg">
         <SearchBar
           value={searchText}
           onChange={(value) => setSearchText(value)}
