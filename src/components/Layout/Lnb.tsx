@@ -3,7 +3,8 @@ import { Desk } from "../../types/desk";
 import { SearchBar } from "./SearchBar";
 import { DeskTooltip } from "../Tooltip/DeskTooltip";
 import { OfficeName } from "../../constants/offices";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { CheckOutlined } from '@ant-design/icons';
 
 interface LnbProps {
   desks: Desk[];
@@ -12,6 +13,7 @@ interface LnbProps {
 
 export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchText, setSearchText] = useState("");
   const [tooltipState, setTooltipState] = useState<{
     show: boolean;
@@ -21,6 +23,11 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
     show: false,
     position: { x: 0, y: 0 },
     desk: null,
+  });
+  const [selectedOffice, setSelectedOffice] = useState<OfficeName | null>(() => {
+    const path = location.pathname;
+    const match = path.match(/\/seating-chart\/(HQ12|HQ13|FF9)/);
+    return match ? match[1] as OfficeName : null;
   });
 
   const filteredDesks = desks.filter((desk) => {
@@ -42,6 +49,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   };
 
   const handleOfficeClick = (office: OfficeName) => {
+    setSelectedOffice(office);
     navigate(`/seating-chart/${office}`);
   }
 
@@ -53,14 +61,32 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
 
       <div className="absolute left-4 top-[140px] w-[200px] bg-white rounded-lg shadow-lg">
         <div className="flex flex-col">
-          <div onClick={() => handleOfficeClick('HQ12')} className="p-4 text-[15px] text-[#81898F] hover:bg-gray-50 cursor-pointer border-b border-gray-200 font-[15px] leading-[22px]">
-            본진 12층
+          <div 
+            onClick={() => handleOfficeClick('HQ12')} 
+            className={`p-4 text-[15px] hover:bg-gray-50 cursor-pointer border-b border-gray-200 font-[15px] leading-[22px] flex justify-between items-center ${
+              selectedOffice === 'HQ12' ? 'text-red-500' : 'text-[#81898F]'
+            }`}
+          >
+            <span>본진 12층</span>
+            {selectedOffice === 'HQ12' && <CheckOutlined className="text-red-500" />}
           </div>
-          <div onClick={() => handleOfficeClick('HQ13')} className="p-4 text-[15px] text-[#81898F] hover:bg-gray-50 cursor-pointer border-b border-gray-200 font-[15px] leading-[22px]">
-            본진 13층
+          <div 
+            onClick={() => handleOfficeClick('HQ13')} 
+            className={`p-4 text-[15px] hover:bg-gray-50 cursor-pointer border-b border-gray-200 font-[15px] leading-[22px] flex justify-between items-center ${
+              selectedOffice === 'HQ13' ? 'text-red-500' : 'text-[#81898F]'
+            }`}
+          >
+            <span>본진 13층</span>
+            {selectedOffice === 'HQ13' && <CheckOutlined className="text-red-500" />}
           </div>
-          <div onClick={() => handleOfficeClick('FF9')} className="p-4 text-[15px] text-[#81898F] hover:bg-gray-50 cursor-pointer font-[15px] leading-[22px] font-medium">
-            패스트파이브
+          <div 
+            onClick={() => handleOfficeClick('FF9')} 
+            className={`p-4 text-[15px] hover:bg-gray-50 cursor-pointer font-[15px] leading-[22px] flex justify-between items-center ${
+              selectedOffice === 'FF9' ? 'text-red-500' : 'text-[#81898F]'
+            }`}
+          >
+            <span>패스트파이브</span>
+            {selectedOffice === 'FF9' && <CheckOutlined className="text-red-500" />}
           </div>
         </div>
       </div>
