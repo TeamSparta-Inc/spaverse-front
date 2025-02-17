@@ -1,4 +1,5 @@
 import { Occupant } from "../../types/desk";
+import { useEffect, useRef } from "react";
 
 interface DeskTooltipProps {
   occupant: Occupant;
@@ -11,26 +12,54 @@ export const DeskTooltip = ({
   position,
   onClose,
 }: DeskTooltipProps) => {
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (tooltipRef.current && !tooltipRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [onClose]);
+
   return (
     <div
+      ref={tooltipRef}
       className="fixed z-50 bg-white shadow-elevation-1 rounded-lg p-4 min-w-[200px]"
       style={{
         left: position.x,
         top: position.y,
       }}
     >
-      <button
-        onClick={onClose}
-        className="absolute top-2 right-2 text-text-tertiary hover:text-text-primary"
-      >
-        ✕
-      </button>
-      <div className="space-y-2">
-        <h3 className="font-medium text-text-primary">{occupant.name}</h3>
-        <p className="text-sm text-text-secondary">{occupant.email}</p>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-blue-40" />
-          <span className="text-sm text-text-secondary">{occupant.team}</span>
+      <div className="flex gap-4">
+        <div className="w-[52px] h-[52px] rounded-full bg-gray-100 overflow-hidden">
+          {occupant.image ? (
+            <img 
+              src={occupant.image} 
+              alt={occupant.name} 
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-blue-40 text-white">
+              {occupant.name.charAt(0)}
+            </div>
+          )}
+        </div>
+        <div>
+          <div className="flex items-center justify-between">
+            <h3 className="font-medium text-text-primary">{occupant.name}</h3>
+            <span className="text-sm text-text-secondary ml-2">{occupant.team}</span>
+          </div>
+          <div className="text-sm text-text-secondary mt-1">
+            <span>패스트파이브 9층</span>
+            <span className="mx-2">|</span>
+            <span>{occupant.email}</span>
+          </div>
         </div>
       </div>
     </div>
