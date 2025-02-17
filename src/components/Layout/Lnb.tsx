@@ -11,6 +11,13 @@ interface LnbProps {
   onDeskSelect: (deskId: string) => void;
 }
 
+const OFFICE_NAMES: { id: OfficeName; label: string }[] = [
+  { id: 'HQ12', label: '본진 12층' },
+  { id: 'HQ13', label: '본진 13층' },
+  { id: 'FF9', label: '패스트파이브 9층' },
+  { id: 'FF10', label: '패스트파이브 10층' },
+];
+
 export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -61,33 +68,20 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
 
       <div className="absolute left-4 top-[140px] w-[200px] bg-white rounded-lg shadow-lg">
         <div className="flex flex-col">
-          <div 
-            onClick={() => handleOfficeClick('HQ12')} 
-            className={`p-4 text-[15px] hover:bg-gray-50 cursor-pointer border-b border-gray-200 font-[15px] leading-[22px] flex justify-between items-center ${
-              selectedOffice === 'HQ12' ? 'text-red-500' : 'text-[#81898F]'
-            }`}
-          >
-            <span>본진 12층</span>
-            {selectedOffice === 'HQ12' && <CheckOutlined className="text-red-500" />}
-          </div>
-          <div 
-            onClick={() => handleOfficeClick('HQ13')} 
-            className={`p-4 text-[15px] hover:bg-gray-50 cursor-pointer border-b border-gray-200 font-[15px] leading-[22px] flex justify-between items-center ${
-              selectedOffice === 'HQ13' ? 'text-red-500' : 'text-[#81898F]'
-            }`}
-          >
-            <span>본진 13층</span>
-            {selectedOffice === 'HQ13' && <CheckOutlined className="text-red-500" />}
-          </div>
-          <div 
-            onClick={() => handleOfficeClick('FF9')} 
-            className={`p-4 text-[15px] hover:bg-gray-50 cursor-pointer font-[15px] leading-[22px] flex justify-between items-center ${
-              selectedOffice === 'FF9' ? 'text-red-500' : 'text-[#81898F]'
-            }`}
-          >
-            <span>패스트파이브</span>
-            {selectedOffice === 'FF9' && <CheckOutlined className="text-red-500" />}
-          </div>
+          {OFFICE_NAMES.map((office, index) => (
+            <div 
+              key={office.id}
+              onClick={() => handleOfficeClick(office.id)} 
+              className={`p-4 text-[15px] hover:bg-gray-50 cursor-pointer ${
+                index !== OFFICE_NAMES.length - 1 ? 'border-b border-gray-200' : ''
+              } font-[15px] leading-[22px] flex justify-between items-center ${
+                selectedOffice === office.id ? 'text-red-500' : 'text-[#81898F]'
+              }`}
+            >
+              <span>{office.label}</span>
+              {selectedOffice === office.id && <CheckOutlined className="text-red-500" />}
+            </div>
+          ))}
         </div>
       </div>
       <div className="absolute left-4 top-[320px] w-[200px] bg-white rounded-lg shadow-lg">
