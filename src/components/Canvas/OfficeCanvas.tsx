@@ -10,6 +10,7 @@ import {
   createRoomGraphics,
 } from "../../utils/canvasUtils";
 import { DeskTooltip } from "../Tooltip/DeskTooltip";
+import * as PIXI from "pixi.js";
 
 interface OfficeCanvasProps {
   rows?: number;
@@ -49,6 +50,13 @@ export const OfficeCanvas = ({
 
     const { CELL_WIDTH, CELL_HEIGHT, MIN_DESK_WIDTH, MIN_DESK_HEIGHT } =
       CANVAS_CONSTANTS;
+
+    // 배경 그리기
+    const background = new PIXI.Graphics();
+    background.beginFill(CANVAS_CONSTANTS.COLORS.BACKGROUND);
+    background.drawRect(0, 0, columns * CELL_WIDTH, rows * CELL_HEIGHT);
+    background.endFill();
+    pixiContainerRef.current.addChild(background);
 
     // 방 그리기
     sampleRooms.forEach((room) => {

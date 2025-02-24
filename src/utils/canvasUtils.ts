@@ -139,8 +139,8 @@ export const createRoomGraphics = (room: Room): PIXI.Container => {
   const roomHeight = room.size.height * CELL_HEIGHT;
 
   // 방 배경
-  roomGraphics.beginFill(COLORS.ROOM_FILL || 0xf6f9fa, 0.5); // neutral-5 with opacity
-  roomGraphics.lineStyle(2, COLORS.ROOM_STROKE || 0xd7e0e6); // neutral-30
+  roomGraphics.beginFill(COLORS.ROOM_FILL); // neutral-5 with opacity
+  roomGraphics.lineStyle(2, COLORS.ROOM_STROKE); // neutral-30
   roomGraphics.drawRect(roomX, roomY, roomWidth, roomHeight);
   roomGraphics.endFill();
 
