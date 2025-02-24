@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Desk } from "../../types/desk";
 import { SearchBar } from "./SearchBar";
 import { DeskTooltip } from "../Tooltip/DeskTooltip";
-import { OfficeName } from "../../constants/offices";
+import { OFFICE_NAMES, OfficeName } from "../../constants/offices";
 import { useNavigate, useLocation } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
 
@@ -11,12 +11,6 @@ interface LnbProps {
   onDeskSelect: (deskId: string) => void;
 }
 
-const OFFICE_NAMES: { id: OfficeName; label: string }[] = [
-  { id: "HQ12", label: "본진 12층" },
-  { id: "HQ13", label: "본진 13층" },
-  { id: "FF9", label: "패스트파이브 9층" },
-  { id: "FF10", label: "패스트파이브 10층" },
-];
 
 export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   const navigate = useNavigate();

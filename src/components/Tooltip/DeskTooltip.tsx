@@ -1,6 +1,6 @@
 import { Occupant } from "../../types/desk";
 import { useEffect, useRef } from "react";
-
+import { OFFICE_NAMES } from "../../constants/offices";
 interface DeskTooltipProps {
   occupant: Occupant;
   position: { x: number; y: number };
@@ -56,7 +56,7 @@ export const DeskTooltip = ({
             <span className="text-sm text-text-secondary ml-2">{occupant.team}</span>
           </div>
           <div className="text-sm text-text-secondary mt-1">
-            <span>패스트파이브 9층</span>
+            <span>{OFFICE_NAMES.find((office) => office.id === occupant.office)?.label}</span>
             <span className="mx-2">|</span>
             <span>{occupant.email}</span>
           </div>
