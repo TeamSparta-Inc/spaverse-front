@@ -1,3 +1,5 @@
+import { OfficeName } from "../constants/offices";
+
 // 책상 정보
 export interface Desk {
   id: string; // 책상 고유 ID
@@ -18,7 +20,7 @@ export interface Occupant {
   name: string;
   email: string;
   team: Team;
-  floor?: string;
+  office: OfficeName;
   image?: string;
 }
 
