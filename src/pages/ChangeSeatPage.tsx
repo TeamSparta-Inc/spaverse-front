@@ -4,8 +4,9 @@ import { Lnb } from "../components/Layout/Lnb";
 import { ZoomControls } from "../components/Layout/ZoomControls";
 import { sampleDesks } from "../data/sampleDesks";
 import { useZoomStore } from "../store/useZoomStore";
+import { Sidebar } from "../components/Layout/Sidebar";
 
-export const SeatingChartPage = () => {
+export const ChangeSeatPage = () => {
   const [selectedDeskId, setSelectedDeskId] = useState<string | null>(null);
   const setScale = useZoomStore((state) => state.setScale);
 
@@ -25,6 +26,7 @@ export const SeatingChartPage = () => {
           selectedDeskId={selectedDeskId}
         />
       </div>
+      <Sidebar isOpen={true} />
       <ZoomControls />
     </>
   );

@@ -11,7 +11,6 @@ interface LnbProps {
   onDeskSelect: (deskId: string) => void;
 }
 
-
 export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,8 +27,10 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   const [selectedOffice, setSelectedOffice] = useState<OfficeName | null>(
     () => {
       const path = location.pathname;
-      const match = path.match(/\/seating-chart\/(HQ12|HQ13|FF9)/);
-      return match ? (match[1] as OfficeName) : null;
+      const match = path.match(
+        /\/(seating-chart|change-seats)\/(HQ12|HQ13|FF9)/
+      );
+      return match ? (match[2] as OfficeName) : null;
     }
   );
 
@@ -53,7 +54,15 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
 
   const handleOfficeClick = (office: OfficeName) => {
     setSelectedOffice(office);
-    navigate(`/seating-chart/${office}`);
+
+    // 현재 경로가 change-seat인지 seating-chart인지 확인
+    const isChangeSeatPage = location.pathname.includes("/change-seats");
+
+    if (isChangeSeatPage) {
+      navigate(`/change-seats/${office}`);
+    } else {
+      navigate(`/seating-chart/${office}`);
+    }
   };
 
   return (
