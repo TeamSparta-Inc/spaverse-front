@@ -16,14 +16,17 @@ export const DeskTooltip = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (tooltipRef.current && !tooltipRef.current.contains(event.target as Node)) {
+      if (
+        tooltipRef.current &&
+        !tooltipRef.current.contains(event.target as Node)
+      ) {
         onClose();
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [onClose]);
 
@@ -38,10 +41,10 @@ export const DeskTooltip = ({
     >
       <div className="flex gap-4">
         <div className="w-[52px] h-[52px] rounded-full bg-gray-100 overflow-hidden">
-          {occupant.image ? (
-            <img 
-              src={occupant.image} 
-              alt={occupant.name} 
+          {occupant.slackImageUrl ? (
+            <img
+              src={occupant.slackImageUrl}
+              alt={occupant.name}
               className="w-full h-full object-cover"
             />
           ) : (
@@ -53,10 +56,17 @@ export const DeskTooltip = ({
         <div>
           <div className="flex items-center justify-between">
             <h3 className="font-medium text-text-primary">{occupant.name}</h3>
-            <span className="text-sm text-text-secondary ml-2">{occupant.team}</span>
+            <span className="text-sm text-text-secondary ml-2">
+              {occupant.team}
+            </span>
           </div>
           <div className="text-sm text-text-secondary mt-1">
-            <span>{OFFICE_NAMES.find((office) => office.id === occupant.office)?.label}</span>
+            <span>
+              {
+                OFFICE_NAMES.find((office) => office.id === occupant.office)
+                  ?.label
+              }
+            </span>
             <span className="mx-2">|</span>
             <span>{occupant.email}</span>
           </div>

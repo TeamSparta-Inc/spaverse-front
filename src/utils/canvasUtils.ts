@@ -145,7 +145,7 @@ export const createRoomGraphics = (room: Room): PIXI.Container => {
   roomGraphics.endFill();
 
   // 방 이름 텍스트
-  const text = new PIXI.Text(room.name, {
+  const text = new PIXI.Text(room.room_name, {
     fontSize: 14,
     fill: COLORS.TEXT,
     fontFamily: "Arial",

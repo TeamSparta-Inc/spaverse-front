@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Select, Input } from "antd";
 // import axios from "axios";
 
-const { Option } = Select;
+// const { Option } = Select;
 
 // 팀별 팀원 데이터 (예시)
 const teamMembers = {
@@ -32,8 +32,8 @@ const teamMembers = {
   ],
 };
 
-const TeamDropdown = ({ deskId }: { deskId: string }) => {
-  const [selectedTeam, setSelectedTeam] = useState<string | null>(null);
+const TeamDropdown = () => {
+  const [, setSelectedTeam] = useState<string | null>(null);
   const [selectedTeamKey, setSelectedTeamKey] = useState<string | null>(null);
   const [selectedMember, setSelectedMember] = useState<string | null>(null);
   const [isCustomMember, setIsCustomMember] = useState<boolean>(false);
@@ -211,7 +211,7 @@ export const Sidebar = ({
             <div className="flex flex-col gap-2"></div>
           </div>
           <div className="text-sm font-pretendard font-bold">팀 지정</div>
-          <TeamDropdown deskId={deskId} />
+          <TeamDropdown />
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-full p-4 ">

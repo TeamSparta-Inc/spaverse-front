@@ -49,7 +49,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
       position: { x: rect.right + 10, y: rect.top },
       desk,
     });
-    onDeskSelect(desk.id);
+    onDeskSelect(desk.desk_unique_id);
   };
 
   const handleOfficeClick = (office: OfficeName) => {

@@ -8,7 +8,7 @@ export const Gnb = () => {
   const isChangeSeatsPage = location.pathname.includes("/change-seats");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
+  const [, setIsPasswordCorrect] = useState(false);
 
   // 올바른 비밀번호 설정 (실제로는 환경변수나 서버에서 관리하는 것이 좋습니다)
   const correctPassword = "1234"; // 예시 비밀번호

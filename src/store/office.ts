@@ -2,7 +2,7 @@ import { Desk } from "../types/desk";
 
 export const initialDesks: Desk[] = [
   {
-    id: "desk1",
+    desk_unique_id: "desk1",
     position: {
       x: 0,
       y: 0,
@@ -12,10 +12,11 @@ export const initialDesks: Desk[] = [
       name: "김철수",
       email: "kim@example.com",
       team: "개발 팀",
+      office: "HQ12",
     },
   },
   {
-    id: "desk2",
+    desk_unique_id: "desk2",
     position: {
       x: 0,
       y: 0,
@@ -25,10 +26,11 @@ export const initialDesks: Desk[] = [
       name: "이영희",
       email: "lee@example.com",
       team: "디자인 팀",
+      office: "HQ12",
     },
   },
   {
-    id: "desk3",
+    desk_unique_id: "desk3",
     position: {
       x: 0,
       y: 0,
@@ -38,6 +40,7 @@ export const initialDesks: Desk[] = [
       name: "박지성",
       email: "park@example.com",
       team: "스코클 팀",
+      office: "HQ12",
     },
   },
 ];

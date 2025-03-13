@@ -2,7 +2,7 @@ import { Desk } from "../types/desk";
 
 export const sampleDesks: Desk[] = [
   {
-    id: "desk1",
+    desk_unique_id: "desk1",
     position: { x: 5, y: 8 },
     occupant: {
       id: "1",
@@ -13,7 +13,7 @@ export const sampleDesks: Desk[] = [
     },
   },
   {
-    id: "desk2",
+    desk_unique_id: "desk2",
     position: { x: 8, y: 8 },
     occupant: {
       id: "2",
@@ -24,7 +24,7 @@ export const sampleDesks: Desk[] = [
     },
   },
   {
-    id: "desk3",
+    desk_unique_id: "desk3",
     position: { x: 5, y: 11 },
     occupant: {
       id: "3",
@@ -35,7 +35,7 @@ export const sampleDesks: Desk[] = [
     },
   },
   {
-    id: "desk4",
+    desk_unique_id: "desk4",
     position: { x: 8, y: 11 },
     occupant: {
       id: "4",
@@ -46,7 +46,7 @@ export const sampleDesks: Desk[] = [
     },
   },
   {
-    id: "desk5",
+    desk_unique_id: "desk5",
     position: { x: 11, y: 8 },
     occupant: {
       id: "5",
@@ -57,7 +57,7 @@ export const sampleDesks: Desk[] = [
     },
   },
   {
-    id: "desk6",
+    desk_unique_id: "desk6",
     position: { x: 22, y: 8 },
     occupant: {
       id: "6",
@@ -68,7 +68,7 @@ export const sampleDesks: Desk[] = [
     },
   },
   {
-    id: "desk7",
+    desk_unique_id: "desk7",
     position: { x: 25, y: 8 },
     occupant: {
       id: "7",
@@ -79,7 +79,7 @@ export const sampleDesks: Desk[] = [
     },
   },
   {
-    id: "desk8",
+    desk_unique_id: "desk8",
     position: { x: 14, y: 11 },
     occupant: {
       id: "8",
@@ -90,7 +90,7 @@ export const sampleDesks: Desk[] = [
     },
   },
   {
-    id: "desk9",
+    desk_unique_id: "desk9",
     position: { x: 5, y: 14 },
     occupant: {
       id: "8",
@@ -101,7 +101,7 @@ export const sampleDesks: Desk[] = [
     },
   },
   {
-    id: "desk10",
+    desk_unique_id: "desk10",
     position: { x: 8, y: 14 },
     occupant: {
       id: "9",
@@ -112,11 +112,11 @@ export const sampleDesks: Desk[] = [
     },
   },
   {
-    id: "desk11",
+    desk_unique_id: "desk11",
     position: { x: 11, y: 14 },
   },
   {
-    id: "desk12",
+    desk_unique_id: "desk12",
     position: { x: 14, y: 14 },
     occupant: {
       id: "10",

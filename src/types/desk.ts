@@ -21,6 +21,7 @@ export interface Occupant {
   name: string;
   slackImageUrl?: string;
   team: Team;
+  office: string;
 }
 
 export type Team = "개발 팀" | "디자인 팀" | "스코클 팀" | "항해 팀";
