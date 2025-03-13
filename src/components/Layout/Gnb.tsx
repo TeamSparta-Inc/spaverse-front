@@ -55,7 +55,7 @@ export const Gnb = () => {
           <div className="flex items-center gap-4">
             {isChangeSeatsPage ? (
               <button
-                className="flex w-[104px] px-2 py-2 justify-center items-center gap-2.5 rounded-md bg-red-500 text-white hover:bg-red-600 text-[15px] leading-[22px] font-bold"
+                className="flex p-2 justify-center items-center gap-2.5 rounded-md bg-red-500 text-white hover:bg-red-600 text-[15px] leading-[22px] font-bold"
                 onClick={() => {
                   showModal();
                 }}
@@ -64,7 +64,7 @@ export const Gnb = () => {
               </button>
             ) : (
               <button
-                className="flex w-[104px] px-3 py-2 justify-center items-center gap-2.5 rounded-md bg-slate-100 text-gray-600 hover:text-gray-900 text-[15px] leading-[22px] font-bold"
+                className="flex p-2 justify-center items-center gap-2.5 rounded-md bg-slate-100 text-gray-600 hover:text-gray-900 text-[15px] leading-[22px] font-bold"
                 onClick={() => {
                   navigate("/change-seats");
                 }}
