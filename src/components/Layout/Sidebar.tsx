@@ -32,7 +32,7 @@ const teamMembers = {
   ],
 };
 
-const TeamDropdown = ({ deskId }: { deskId?: string | null }) => {
+const TeamDropdown = () => {
   const [, setSelectedTeam] = useState<string | null>(null);
   const [selectedTeamKey, setSelectedTeamKey] = useState<string | null>(null);
   const [selectedMember, setSelectedMember] = useState<string | null>(null);
@@ -211,7 +211,7 @@ export const Sidebar = ({
             <div className="flex flex-col gap-2"></div>
           </div>
           <div className="text-sm font-pretendard font-bold">팀 지정</div>
-          <TeamDropdown key={deskId} deskId={deskId} />
+          <TeamDropdown key={deskId} />
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-full p-4 ">
