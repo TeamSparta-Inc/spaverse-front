@@ -42,7 +42,7 @@ export const sampleDesks: Desk[] = [
       name: "최동훈",
       email: "choi@gmail.com",
       team: "항해 팀",
-      office: "HQ13",
+      office: "FF9",
     },
   },
   {
@@ -53,7 +53,7 @@ export const sampleDesks: Desk[] = [
       name: "정수진",
       email: "jeong@gmail.com",
       team: "항해 팀",
-      office: "HQ13",
+      office: "FF9",
     },
   },
   {
@@ -64,7 +64,7 @@ export const sampleDesks: Desk[] = [
       name: "강민수",
       email: "kang@gmail.com",
       team: "항해 팀",
-      office: "HQ13",
+      office: "FF9",
     },
   },
   {
@@ -75,7 +75,7 @@ export const sampleDesks: Desk[] = [
       name: "한지연",
       email: "han@gmail.com",
       team: "항해 팀",
-      office: "HQ13",
+      office: "FF9",
     },
   },
   {
@@ -86,7 +86,7 @@ export const sampleDesks: Desk[] = [
       name: "송태호",
       email: "song@gmail.com",
       team: "개발 팀",
-      office: "HQ13",
+      office: "FF9",
     },
   },
   {
@@ -97,7 +97,7 @@ export const sampleDesks: Desk[] = [
       name: "송태호",
       email: "song@gmail.com",
       team: "개발 팀",
-      office: "HQ13",
+      office: "FF9",
     },
   },
   {
@@ -108,12 +108,8 @@ export const sampleDesks: Desk[] = [
       name: "임서연",
       email: "lim@gmail.com",
       team: "개발 팀",
-      office: "HQ13",
+      office: "FF9",
     },
-  },
-  {
-    desk_unique_id: "desk11",
-    position: { x: 11, y: 14 },
   },
   {
     desk_unique_id: "desk12",
@@ -123,7 +119,7 @@ export const sampleDesks: Desk[] = [
       name: "윤하은",
       email: "yoon@gmail.com",
       team: "개발 팀",
-      office: "HQ13",
+      office: "FF9",
     },
   },
 ];

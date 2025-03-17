@@ -21,7 +21,7 @@ export type CustomError = AxiosError<ErrorResponse>;
 export type HttpMethod = "get" | "post" | "put" | "patch" | "delete";
 
 const instance = axios.create({
-  baseURL: "https://59d8-210-217-92-1.ngrok-free.app/api/v1",
+  baseURL: "http://api-spaverse.spartacodingclub.kr/api/v1",
   headers: {
     "Content-Type": `application/json`,
     "ngrok-skip-browser-warning": true,

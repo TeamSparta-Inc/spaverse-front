@@ -1,5 +1,6 @@
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import Axios from "../axios/instance";
+import { Team, User } from "../types/user";
 
 export const userKeys = {
   all: ["user"] as const,
@@ -9,12 +10,12 @@ export const userKeys = {
 
 export const userQuery = {
   allTeams: () =>
-    queryOptions({
+    queryOptions<Team[]>({
       queryKey: userKeys.allTeams(),
       queryFn: () => Axios("get", `/teams`),
     }),
   teamUsers: (teamId: string) =>
-    queryOptions({
+    queryOptions<User[]>({
       queryKey: userKeys.teamUsers(teamId),
       queryFn: () => Axios("get", `/teams/${teamId}/users`),
     }),

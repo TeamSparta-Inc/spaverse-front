@@ -4,6 +4,7 @@ import { Lnb } from "../components/Layout/Lnb";
 import { ZoomControls } from "../components/Layout/ZoomControls";
 import { sampleDesks } from "../data/sampleDesks";
 import { useZoomStore } from "../store/useZoomStore";
+import { useGetFinalOffice } from "../quries/office.query";
 
 export const SeatingChartPage = () => {
   const [selectedDeskId, setSelectedDeskId] = useState<string | null>(null);
@@ -13,6 +14,10 @@ export const SeatingChartPage = () => {
     setSelectedDeskId(deskId);
     setScale(1.5); // 선택된 책상 확대
   };
+
+  const { data: finalOffice } = useGetFinalOffice("HQ13");
+
+  console.log(finalOffice);
 
   return (
     <>
