@@ -24,9 +24,10 @@ export const ChangeSeatPage = () => {
           rows={73}
           desks={sampleDesks}
           selectedDeskId={selectedDeskId}
+          setSelectedDeskId={setSelectedDeskId}
         />
       </div>
-      <Sidebar isOpen={true} />
+      <Sidebar isOpen={true} deskId={selectedDeskId} />
       <ZoomControls />
     </>
   );

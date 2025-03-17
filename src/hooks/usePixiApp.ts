@@ -10,7 +10,8 @@ interface TooltipState {
 
 export const usePixiApp = (
   containerRef: React.RefObject<HTMLDivElement>,
-  onDeskClick?: (tooltipState: TooltipState) => void
+  onDeskClick?: (tooltipState: TooltipState) => void,
+  setSelectedDeskId?: (deskId: string) => void
 ) => {
   const appRef = useRef<PIXI.Application | null>(null);
   const pixiContainerRef = useRef<PIXI.Container | null>(null);
@@ -36,6 +37,8 @@ export const usePixiApp = (
         position: { x, y },
         desk,
       });
+
+      setSelectedDeskId?.(desk.desk_unique_id);
     },
     [onDeskClick]
   );

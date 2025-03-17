@@ -17,6 +17,7 @@ interface OfficeCanvasProps {
   columns?: number;
   desks: Desk[];
   selectedDeskId?: string | null;
+  setSelectedDeskId?: (deskId: string) => void;
 }
 
 export const OfficeCanvas = ({
@@ -24,6 +25,7 @@ export const OfficeCanvas = ({
   columns = 16,
   desks = [],
   selectedDeskId,
+  setSelectedDeskId,
 }: OfficeCanvasProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tooltipState, setTooltipState] = useState<{
@@ -38,7 +40,8 @@ export const OfficeCanvas = ({
 
   const { appRef, pixiContainerRef, handleDeskClick } = usePixiApp(
     containerRef,
-    setTooltipState
+    setTooltipState,
+    setSelectedDeskId
   );
 
   const scale = useZoomStore((state) => state.scale);
@@ -66,7 +69,7 @@ export const OfficeCanvas = ({
 
     // 책상 그리기
     desks.forEach((desk) => {
-      // const isSelected = desk.id === selectedDeskId;
+      // const isSelected = desk.desk_unique_id === selectedDeskId;
       const deskX = (desk.position.x - 3) * CELL_WIDTH;
       const deskY = desk.position.y * CELL_HEIGHT;
       const deskWidth = 3 * CELL_WIDTH;

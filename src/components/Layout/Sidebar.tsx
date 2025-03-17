@@ -32,7 +32,7 @@ const teamMembers = {
   ],
 };
 
-const TeamDropdown = () => {
+const TeamDropdown = ({ deskId }: { deskId?: string | null }) => {
   const [, setSelectedTeam] = useState<string | null>(null);
   const [selectedTeamKey, setSelectedTeamKey] = useState<string | null>(null);
   const [selectedMember, setSelectedMember] = useState<string | null>(null);
@@ -192,9 +192,9 @@ export const Sidebar = ({
   deskId,
 }: {
   isOpen: boolean;
-  deskId?: string;
+  deskId?: string | null;
 }) => {
-  const isSeatClick = Boolean(deskId);
+  const isSeatClick = !!deskId;
   return (
     <div
       className={`fixed top-[30px] right-0 w-[300px] h-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
@@ -211,7 +211,7 @@ export const Sidebar = ({
             <div className="flex flex-col gap-2"></div>
           </div>
           <div className="text-sm font-pretendard font-bold">팀 지정</div>
-          <TeamDropdown />
+          <TeamDropdown key={deskId} deskId={deskId} />
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-full p-4 ">
