@@ -22,15 +22,6 @@ export type HttpMethod = "get" | "post" | "put" | "patch" | "delete";
 
 const instance = axios.create({
   baseURL: "http://api-spaverse.spartacodingclub.kr/api/v1",
-  headers: {
-    "Content-Type": `application/json`,
-    "ngrok-skip-browser-warning": true,
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-    "Access-Control-Allow-Headers":
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-  },
-  withCredentials: true,
 });
 
 const request = async (
