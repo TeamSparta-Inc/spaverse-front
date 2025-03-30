@@ -1,4 +1,4 @@
-import { queryOptions, useQuery } from "@tanstack/react-query";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import Axios from "../axios/instance";
 import { OfficeName } from "../constants/offices";
 import { Office } from "../types/offices";
@@ -26,7 +26,7 @@ export const officeQuery = {
 };
 
 export const useGetFinalOffice = (officeName: OfficeName) =>
-  useQuery(officeQuery.finalOffice(officeName));
+  useSuspenseQuery(officeQuery.finalOffice(officeName));
 
 export const useGetTempOffice = (officeName: OfficeName) =>
-  useQuery(officeQuery.tempOffice(officeName));
+  useSuspenseQuery(officeQuery.tempOffice(officeName));

@@ -59,14 +59,16 @@ export const createDeskGraphics = (
 
   if (desk.occupant) {
     const badge = new PIXI.Graphics();
-    const badgeRadius = 7;
-    const colors = TEAM_COLORS[desk.occupant.team];
+    const badgeRadius = 8;
+
+    //TODO: 팀 색깔 정하기
+    const colors = TEAM_COLORS[desk.occupant.team] ?? TEAM_COLORS["미지정"];
 
     badge.beginFill(colors.primary);
-    badge.lineStyle(1, colors.secondary);
+    badge.lineStyle(1, 0xffffff);
     badge.drawCircle(
-      deskX + badgeRadius + 10,
-      deskY + deskHeight / 2,
+      deskX + deskWidth / 2 - 26,
+      deskY + deskHeight / 2 + 1,
       badgeRadius
     );
     badge.endFill();
@@ -84,48 +86,93 @@ export const createDeskText = (
   deskWidth: number,
   deskHeight: number
 ): PIXI.Text => {
-  const { MIN_FONT_SIZE, MAX_FONT_SIZE, COLORS } = CANVAS_CONSTANTS;
+  const { COLORS } = CANVAS_CONSTANTS;
 
-  const fontSize = Math.max(
-    MIN_FONT_SIZE,
-    Math.min(MAX_FONT_SIZE, deskWidth / 8)
-  );
   const text = new PIXI.Text(desk.occupant?.name || "(공석)", {
-    fontSize,
+    fontSize: 17,
     fill: COLORS.TEXT,
-    fontFamily: "Arial",
-    align: "center",
+    fontFamily: "Pretendard",
+    fontStyle: "normal",
+    fontWeight: "600",
+    lineHeight: 26,
     stroke: COLORS.TEXT_STROKE,
-    strokeThickness: 1.36089026927948,
+    strokeThickness: 2,
   });
 
-  text.position.set(
-    deskX + deskWidth / 2 - text.width / 2,
-    deskY + deskHeight / 2 - text.height / 2
-  );
+  if (desk.occupant) {
+    text.position.set(
+      deskX + deskWidth / 2 - 14,
+      deskY + deskHeight / 2 - text.height / 2
+    );
+  } else {
+    text.position.set(
+      deskX + deskWidth / 2 - text.width / 2,
+      deskY + deskHeight / 2 - text.height / 2
+    );
+  }
 
   return text;
 };
 
-export const TEAM_COLORS: Record<Team, { primary: number; secondary: number }> =
-  {
-    "개발 팀": {
-      primary: 0x8fc9ff, // blue-40
-      secondary: 0x2998ff, // blue-60
-    },
-    "디자인 팀": {
-      primary: 0xb2a3ff, // purple-40
-      secondary: 0x846bff, // purple-60
-    },
-    "스코클 팀": {
-      primary: 0x96eb96, // green-40
-      secondary: 0x55d455, // green-60
-    },
-    "항해 팀": {
-      primary: 0xffbe8f, // orange-40
-      secondary: 0xff8026, // orange-60
-    },
-  };
+export const TEAM_COLORS: Record<Team, { primary: string }> = {
+  스코클팀: {
+    primary: "#FF8026",
+  },
+  디자인팀: {
+    primary: "#ACF2AC",
+  },
+  개발팀: {
+    primary: "#B70D23",
+  },
+  내배캠팀: {
+    primary: "#FFBAC4",
+  },
+  마케팅팀: {
+    primary: "#008000",
+  },
+  항해팀: {
+    primary: "#82E8DE",
+  },
+  CX팀: {
+    primary: "#FFBE8F",
+  },
+  대외협력팀: {
+    primary: "#26CE75",
+  },
+  피플팀: {
+    primary: "#FFDEA6",
+  },
+  재무팀: {
+    primary: "#1F94DC",
+  },
+  콘텐츠팀: {
+    primary: "#681FDC",
+  },
+  외주팀: {
+    primary: "#BED417",
+  },
+  게임팀: {
+    primary: "#BC50E4",
+  },
+  커리어개발팀: {
+    primary: "#37A28C",
+  },
+  글로벌팀: {
+    primary: "#681FDC",
+  },
+  직속팀: {
+    primary: "#A54E0B",
+  },
+  B2B팀: {
+    primary: "#DC1F87",
+  },
+  스튜디오팀: {
+    primary: "#1D519F",
+  },
+  미지정: {
+    primary: "#9DA7AE",
+  },
+};
 
 export const createRoomGraphics = (room: Room): PIXI.Container => {
   const { CELL_WIDTH, CELL_HEIGHT, COLORS } = CANVAS_CONSTANTS;

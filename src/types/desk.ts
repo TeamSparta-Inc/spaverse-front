@@ -16,12 +16,30 @@ export interface GridPosition {
 }
 
 export interface Occupant {
-  email: string;
   id: string;
   name: string;
-  slackImageUrl?: string;
+  email: string;
   team: Team;
-  office: string;
+  slackImageUrl?: string;
 }
 
-export type Team = "개발 팀" | "디자인 팀" | "스코클 팀" | "항해 팀";
+export type Team =
+  | "개발팀"
+  | "디자인팀"
+  | "스코클팀"
+  | "항해팀"
+  | "게임팀"
+  | "B2B팀"
+  | "내배캠팀"
+  | "CX팀"
+  | "커리어개발팀"
+  | "직속팀"
+  | "마케팅팀"
+  | "피플팀"
+  | "외주팀"
+  | "재무팀"
+  | "글로벌팀"
+  | "대외협력팀"
+  | "콘텐츠팀"
+  | "스튜디오팀"
+  | "미지정";
