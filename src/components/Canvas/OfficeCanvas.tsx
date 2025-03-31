@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { CANVAS_CONSTANTS } from "../../constants/canvas";
-import { sampleRooms } from "../../data/sampleRooms";
 import { usePixiApp } from "../../hooks/usePixiApp";
 import { useZoomStore } from "../../store/useZoomStore";
 import { Desk } from "../../types/desk";
@@ -11,11 +10,14 @@ import {
 } from "../../utils/canvasUtils";
 import { DeskTooltip } from "../Tooltip/DeskTooltip";
 import * as PIXI from "pixi.js";
+import { Room } from "../../types/room";
+import { sampleRooms } from "../../data/sampleRooms";
 
 interface OfficeCanvasProps {
   rows?: number;
   columns?: number;
   desks: Desk[];
+  rooms: Room[];
   selectedDeskId?: string | null;
   setSelectedDeskId?: (deskId: string) => void;
 }
@@ -24,9 +26,11 @@ export const OfficeCanvas = ({
   rows = 12,
   columns = 16,
   desks = [],
+  rooms = [],
   selectedDeskId,
   setSelectedDeskId,
 }: OfficeCanvasProps) => {
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [tooltipState, setTooltipState] = useState<{
     show: boolean;
@@ -62,7 +66,7 @@ export const OfficeCanvas = ({
     pixiContainerRef.current.addChild(background);
 
     // 방 그리기
-    sampleRooms.forEach((room) => {
+    rooms.forEach((room) => {
       const roomGraphics = createRoomGraphics(room);
       pixiContainerRef.current?.addChild(roomGraphics);
     });
@@ -106,7 +110,7 @@ export const OfficeCanvas = ({
 
   useEffect(() => {
     draw();
-  }, [desks, rows, columns, selectedDeskId]);
+  }, [desks, rows, columns, selectedDeskId, rooms]);
 
   return (
     <div ref={containerRef} className="relative w-full h-full">

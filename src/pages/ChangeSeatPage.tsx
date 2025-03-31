@@ -12,6 +12,7 @@ export const ChangeSeatPage = () => {
   const setScale = useZoomStore((state) => state.setScale);
   const { data: finalOffice } = useGetTempOffice("FF9");
   const desks = finalOffice?.desks || [];
+  const rooms = finalOffice?.rooms || [];
   const handleDeskSelect = (deskId: string) => {
     setSelectedDeskId(deskId);
     setScale(1.5); // 선택된 책상 확대
@@ -25,6 +26,7 @@ export const ChangeSeatPage = () => {
           columns={37}
           rows={73}
           desks={desks}
+          rooms={rooms}
           selectedDeskId={selectedDeskId}
           setSelectedDeskId={setSelectedDeskId}
         />

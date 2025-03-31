@@ -8,8 +8,8 @@ export const OfficeCanvasContainer = ({
 }) => {
   const { data: finalOffice } = useGetTempOffice("FF9");
   const desks = finalOffice?.desks || [];
-
-  console.log(JSON.stringify(desks, null, 2));
+  const rooms = finalOffice?.rooms || [];
+  
 
   return (
     <div className="flex-1 relative">
@@ -17,6 +17,7 @@ export const OfficeCanvasContainer = ({
         columns={37}
         rows={73}
         desks={desks}
+        rooms={rooms}
         selectedDeskId={selectedDeskId}
       />
     </div>

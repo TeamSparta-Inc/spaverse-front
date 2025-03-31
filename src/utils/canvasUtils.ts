@@ -180,7 +180,7 @@ export const createRoomGraphics = (room: Room): PIXI.Container => {
 
   // 방 배경 그리기
   const roomGraphics = new PIXI.Graphics();
-  const roomX = room.position.x * CELL_WIDTH;
+  const roomX = (room.position.x - 3) * CELL_WIDTH;
   const roomY = room.position.y * CELL_HEIGHT;
   const roomWidth = room.size.width * CELL_WIDTH;
   const roomHeight = room.size.height * CELL_HEIGHT;
@@ -193,10 +193,11 @@ export const createRoomGraphics = (room: Room): PIXI.Container => {
 
   // 방 이름 텍스트
   const text = new PIXI.Text(room.room_name, {
-    fontSize: 14,
-    fill: COLORS.TEXT,
-    fontFamily: "Arial",
+    fontSize: 22,
+    fill: "#81898f",
+    fontFamily: "Pretendard",
     align: "center",
+    fontWeight: "700",
   });
 
   text.position.set(roomX + roomWidth / 2 - text.width / 2, roomY + 10);
