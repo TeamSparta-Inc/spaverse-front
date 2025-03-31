@@ -5,11 +5,13 @@ import { ZoomControls } from "../components/Layout/ZoomControls";
 import { sampleDesks } from "../data/sampleDesks";
 import { useZoomStore } from "../store/useZoomStore";
 import { Sidebar } from "../components/Layout/Sidebar";
+import { useGetTempOffice } from "../quries/office.query";
 
 export const ChangeSeatPage = () => {
   const [selectedDeskId, setSelectedDeskId] = useState<string | null>(null);
   const setScale = useZoomStore((state) => state.setScale);
-
+  const { data: finalOffice } = useGetTempOffice("FF9");
+  const desks = finalOffice?.desks || [];
   const handleDeskSelect = (deskId: string) => {
     setSelectedDeskId(deskId);
     setScale(1.5); // 선택된 책상 확대
@@ -22,7 +24,7 @@ export const ChangeSeatPage = () => {
         <OfficeCanvas
           columns={37}
           rows={73}
-          desks={sampleDesks}
+          desks={desks}
           selectedDeskId={selectedDeskId}
           setSelectedDeskId={setSelectedDeskId}
         />
