@@ -4,8 +4,8 @@ export const sampleRooms: Room[] = [
   {
     room_unique_id: "room1",
     room_name: "회의실 1",
-    position: { x: 0, y: 0 },
-    size: { width: 8, height: 6 },
+    position: { x: 0, y: 4 },
+    size: { width: 3, height: 5 },
   },
   {
     room_unique_id: "room2",
