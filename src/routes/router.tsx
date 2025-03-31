@@ -8,6 +8,7 @@ import { DefaultLayout } from "../components/Layout/DefaultLayout";
 import { SeatingChartPage } from "../pages/SeatingChartPage";
 import { isValidOffice } from "../constants/offices";
 import { ChangeSeatPage } from "../pages/ChangeSeatPage";
+import { Suspense } from "react";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,7 +16,11 @@ export const router = createBrowserRouter(
       <Route element={<DefaultLayout />}>
         <Route
           path="/seating-chart/:officeName"
-          element={<SeatingChartPage />}
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <SeatingChartPage />
+            </Suspense>
+          }
           loader={({ params }) => {
             if (!params.officeName || !isValidOffice(params.officeName)) {
               throw new Response("", {
@@ -29,7 +34,11 @@ export const router = createBrowserRouter(
         />
         <Route
           path="/change-seats/:officeName"
-          element={<ChangeSeatPage />}
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <ChangeSeatPage />
+            </Suspense>
+          }
           loader={({ params }) => {
             if (!params.officeName || !isValidOffice(params.officeName)) {
               throw new Response("", {
@@ -43,10 +52,21 @@ export const router = createBrowserRouter(
         />
         <Route
           path="/change-seats"
-          element={<Navigate to="/change-seats/HQ12" replace />}
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Navigate to="/change-seats/HQ12" replace />
+            </Suspense>
+          }
         />
       </Route>
-      <Route path="/" element={<Navigate to="/seating-chart/HQ12" replace />} />
+      <Route
+        path="/"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <Navigate to="/seating-chart/HQ12" replace />
+          </Suspense>
+        }
+      />
     </>
   )
 );
