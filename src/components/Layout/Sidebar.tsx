@@ -1,53 +1,29 @@
 import { InfoCircleFilled } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import { Select, Input } from "antd";
-// import axios from "axios";
+import {
+  useGetAllTeams,
+  useGetTeamUsers,
+  usePatchOccupant,
+  usePatchTeam,
+} from "../../quries/user.query";
+import { useParams } from "react-router-dom";
 
-// const { Option } = Select;
-
-// 팀별 팀원 데이터 (예시)
-const teamMembers = {
-  dev: [
-    { name: "김개발", id: "dev1" },
-    { name: "이코딩", id: "dev2" },
-    { name: "박프론트", id: "dev3" },
-    { name: "최백엔드", id: "dev4" },
-  ],
-  design: [
-    { name: "김디자인", id: "design1" },
-    { name: "이그래픽", id: "design2" },
-    { name: "박UI", id: "design3" },
-  ],
-  planning: [
-    { name: "김기획", id: "planning1" },
-    { name: "이전략", id: "planning2" },
-  ],
-  marketing: [
-    { name: "김마케팅", id: "marketing1" },
-    { name: "이홍보", id: "marketing2" },
-  ],
-  hr: [
-    { name: "김인사", id: "hr1" },
-    { name: "이채용", id: "hr2" },
-  ],
-};
-
-const TeamDropdown = () => {
+const TeamDropdown = ({ deskId }: { deskId: string }) => {
   const [, setSelectedTeam] = useState<string | null>(null);
-  const [selectedTeamKey, setSelectedTeamKey] = useState<string | null>(null);
+  const [selectedTeamKey, setSelectedTeamKey] = useState<string>(
+    "64d35eb339e9cbd2505cecfb"
+  );
   const [selectedMember, setSelectedMember] = useState<string | null>(null);
   const [isCustomMember, setIsCustomMember] = useState<boolean>(false);
   const [customMemberName, setCustomMemberName] = useState<string>("");
   const [isSaving, setIsSaving] = useState<boolean>(false);
 
-  const teams = [
-    { label: "개발팀", value: "dev" },
-    { label: "디자인팀", value: "design" },
-    { label: "기획팀", value: "planning" },
-    { label: "마케팅팀", value: "marketing" },
-    { label: "인사팀", value: "hr" },
-  ];
-
+  const { officeName } = useParams<{ officeName: string }>();
+  const { data: teams } = useGetAllTeams();
+  const { data: teamUsers } = useGetTeamUsers(selectedTeamKey);
+  const { mutate: patchOccupant } = usePatchOccupant(selectedTeamKey);
+  const { mutate: patchTeam } = usePatchTeam();
   useEffect(() => {
     if (!selectedTeamKey) return;
 
@@ -75,20 +51,15 @@ const TeamDropdown = () => {
           isCustom: true,
         };
       } else if (selectedMember && selectedMember !== "custom") {
-        const member = teamMembers[
-          selectedTeamKey as keyof typeof teamMembers
-        ]?.find((m) => m.id === selectedMember);
+        const member = teamUsers?.find((m) => m._id === selectedMember);
         if (member) {
           data.member = {
-            id: member.id,
+            id: member._id,
             name: member.name,
             isCustom: false,
           };
         }
       }
-
-      // const response = await axios.patch(`/api/desks/${deskId}`, data);
-      // console.log("자동 저장 완료:", response.data);
     } catch (error) {
       console.error("자동 저장 실패:", error);
     } finally {
@@ -98,13 +69,18 @@ const TeamDropdown = () => {
 
   const handleTeamSelect = (value: string) => {
     setSelectedTeamKey(value);
-    const team = teams.find((t) => t.value === value);
+    const team = teams.find((t) => t.name === value);
     if (team) {
-      setSelectedTeam(team.label);
+      setSelectedTeam(team.name);
     }
     setSelectedMember(null);
     setIsCustomMember(false);
     setCustomMemberName("");
+    patchTeam({
+      officeName: officeName || "",
+      deskId: deskId,
+      teamId: value,
+    });
   };
 
   const handleMemberSelect = (value: string) => {
@@ -115,6 +91,11 @@ const TeamDropdown = () => {
       setIsCustomMember(false);
       setSelectedMember(value);
     }
+    patchOccupant({
+      officeName: officeName || "",
+      deskId: deskId,
+      memberId: value,
+    });
   };
 
   const handleCustomMemberNameChange = (
@@ -139,8 +120,8 @@ const TeamDropdown = () => {
         }
       >
         {teams.map((team) => (
-          <Select.Option key={team.value} value={team.value}>
-            {team.label}
+          <Select.Option key={team.name + team.floor} value={team._id}>
+            {team.name}
           </Select.Option>
         ))}
       </Select>
@@ -161,13 +142,11 @@ const TeamDropdown = () => {
             }
             style={{ width: "100%" }}
           >
-            {teamMembers[selectedTeamKey as keyof typeof teamMembers]?.map(
-              (member) => (
-                <Select.Option key={member.id} value={member.id}>
-                  {member.name}
-                </Select.Option>
-              )
-            )}
+            {teamUsers?.map((member) => (
+              <Select.Option key={member._id} value={member._id}>
+                {member.name}
+              </Select.Option>
+            ))}
             <Select.Option key="custom" value="custom">
               기타
             </Select.Option>
@@ -211,7 +190,7 @@ export const Sidebar = ({
             <div className="flex flex-col gap-2"></div>
           </div>
           <div className="text-sm font-pretendard font-bold">팀 지정</div>
-          <TeamDropdown key={deskId} />
+          <TeamDropdown key={deskId} deskId={deskId} />
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-full p-4 ">

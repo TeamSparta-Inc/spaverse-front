@@ -10,6 +10,7 @@ import { useGetTempOffice } from "../quries/office.query";
 export const ChangeSeatPage = () => {
   const [selectedDeskId, setSelectedDeskId] = useState<string | null>(null);
   const setScale = useZoomStore((state) => state.setScale);
+
   const { data: finalOffice } = useGetTempOffice("FF9");
   const desks = finalOffice?.desks || [];
   const rooms = finalOffice?.rooms || [];
