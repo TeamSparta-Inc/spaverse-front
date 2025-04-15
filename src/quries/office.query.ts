@@ -1,4 +1,8 @@
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  queryOptions,
+  useMutation,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import Axios from "../axios/instance";
 import { OfficeName } from "../constants/offices";
 import { Office } from "../types/offices";
@@ -30,3 +34,15 @@ export const useGetFinalOffice = (officeName: OfficeName) =>
 
 export const useGetTempOffice = (officeName: OfficeName) =>
   useSuspenseQuery(officeQuery.tempOffice(officeName));
+
+export const usePublishOffice = () =>
+  useMutation({
+    mutationFn: ({ officeName }: { officeName: OfficeName }) =>
+      Axios("post", `/temp-offices/${officeName}/publish`),
+  });
+
+export const useDiscardOffice = () =>
+  useMutation({
+    mutationFn: ({ officeName }: { officeName: OfficeName }) =>
+      Axios("post", `/temp-offices/${officeName}/discard`),
+  });

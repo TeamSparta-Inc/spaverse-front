@@ -1,6 +1,8 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useState } from "react";
 import { Modal, Input, message } from "antd";
+import { usePublishOffice } from "../../quries/office.query";
+import { OfficeName } from "../../constants/offices";
 
 export const Gnb = () => {
   const navigate = useNavigate();
@@ -9,6 +11,8 @@ export const Gnb = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [, setIsPasswordCorrect] = useState(false);
+  const { officeName } = useParams<{ officeName: OfficeName }>();
+  const { mutate: publishOffice } = usePublishOffice();
 
   // 올바른 비밀번호 설정 (실제로는 환경변수나 서버에서 관리하는 것이 좋습니다)
   const correctPassword = "1234"; // 예시 비밀번호
@@ -27,7 +31,9 @@ export const Gnb = () => {
       setIsModalVisible(false);
 
       // 비밀번호가 맞으면 원하는 동작 수행
-      navigate("/change-seats/HQ12"); // 예: 자리 바꾸기 페이지로 이동
+      if (officeName) {
+        publishOffice({ officeName: officeName });
+      }
     } else {
       message.error("비밀번호가 일치하지 않습니다.");
       // 비밀번호가 틀려도 모달은 닫지 않음
