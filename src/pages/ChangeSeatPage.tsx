@@ -6,12 +6,17 @@ import { sampleDesks } from "../data/sampleDesks";
 import { useZoomStore } from "../store/useZoomStore";
 import { Sidebar } from "../components/Layout/Sidebar";
 import { useGetTempOffice } from "../quries/office.query";
+import { useParams } from "react-router-dom";
+import { OfficeName } from "../constants/offices";
 
 export const ChangeSeatPage = () => {
+  const { officeName } = useParams() as {
+    officeName: OfficeName;
+  };
   const [selectedDeskId, setSelectedDeskId] = useState<string | null>(null);
   const setScale = useZoomStore((state) => state.setScale);
 
-  const { data: finalOffice } = useGetTempOffice("FF9");
+  const { data: finalOffice } = useGetTempOffice(officeName);
   const desks = finalOffice?.desks || [];
   const rooms = finalOffice?.rooms || [];
   const handleDeskSelect = (deskId: string) => {

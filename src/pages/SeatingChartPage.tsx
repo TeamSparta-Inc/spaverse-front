@@ -1,10 +1,12 @@
 import { Suspense, useState } from "react";
 import { Lnb } from "../components/Layout/Lnb";
 import { ZoomControls } from "../components/Layout/ZoomControls";
-import { sampleDesks } from "../data/sampleDesks";
+import { useParams } from "react-router-dom";
+import { OfficeName } from "../constants/offices";
 import { useZoomStore } from "../store/useZoomStore";
 import { OfficeCanvasContainer } from "../components/Canvas/OfficeCanvasContainer";
-
+import { useGetFinalOffice } from "../quries/office.query";
+import { sampleDesks } from "../data/sampleDesks";
 export const SeatingChartPage = () => {
   const setScale = useZoomStore((state) => state.setScale);
 
@@ -14,9 +16,16 @@ export const SeatingChartPage = () => {
     setScale(1.5); // 선택된 책상 확대
   };
 
+  const { officeName } = useParams() as {
+    officeName: OfficeName;
+  };
+
+  const { data: finalOffice } = useGetFinalOffice(officeName);
+  const desks = finalOffice?.desks || [];
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Lnb desks={sampleDesks} onDeskSelect={handleDeskSelect} />
+      <Lnb desks={desks} onDeskSelect={handleDeskSelect} />
       <OfficeCanvasContainer selectedDeskId={selectedDeskId} />
       <ZoomControls />
     </Suspense>
