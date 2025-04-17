@@ -1,6 +1,5 @@
-import { Occupant } from "../../types/desk";
 import { useEffect, useRef } from "react";
-import { OFFICE_NAMES } from "../../constants/offices";
+import { Occupant } from "../../types/desk";
 interface DeskTooltipProps {
   occupant: Occupant;
   position: { x: number; y: number };
