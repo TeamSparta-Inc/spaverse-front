@@ -62,10 +62,10 @@ export const DeskTooltip = ({
           </div>
           <div className="text-sm text-text-secondary mt-1">
             <span>
-              {
+              {/* {
                 OFFICE_NAMES.find((office) => office.id === occupant.office)
                   ?.label
-              }
+              } */}
             </span>
             <span className="mx-2">|</span>
             <span>{occupant.email}</span>
