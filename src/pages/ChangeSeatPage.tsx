@@ -2,7 +2,7 @@ import { Suspense, useState } from "react";
 import { OfficeCanvas } from "../components/Canvas/OfficeCanvas";
 import { Lnb } from "../components/Layout/Lnb";
 import { ZoomControls } from "../components/Layout/ZoomControls";
-import { sampleDesks } from "../data/sampleDesks";
+
 import { useZoomStore } from "../store/useZoomStore";
 import { Sidebar } from "../components/Layout/Sidebar";
 import { useGetTempOffice } from "../quries/office.query";
@@ -26,7 +26,7 @@ export const ChangeSeatPage = () => {
 
   return (
     <>
-      <Lnb desks={sampleDesks} onDeskSelect={handleDeskSelect} />
+      <Lnb desks={desks} onDeskSelect={handleDeskSelect} />
       <div className="flex-1 relative">
         <OfficeCanvas
           columns={37}
