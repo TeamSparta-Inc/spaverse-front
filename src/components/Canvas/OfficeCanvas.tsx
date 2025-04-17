@@ -1,17 +1,16 @@
+import * as PIXI from "pixi.js";
 import { useEffect, useRef, useState } from "react";
 import { CANVAS_CONSTANTS } from "../../constants/canvas";
 import { usePixiApp } from "../../hooks/usePixiApp";
 import { useZoomStore } from "../../store/useZoomStore";
 import { Desk } from "../../types/desk";
+import { Room } from "../../types/room";
 import {
   createDeskGraphics,
   createDeskText,
   createRoomGraphics,
 } from "../../utils/canvasUtils";
 import { DeskTooltip } from "../Tooltip/DeskTooltip";
-import * as PIXI from "pixi.js";
-import { Room } from "../../types/room";
-import { sampleRooms } from "../../data/sampleRooms";
 
 interface OfficeCanvasProps {
   rows?: number;
@@ -30,7 +29,6 @@ export const OfficeCanvas = ({
   selectedDeskId,
   setSelectedDeskId,
 }: OfficeCanvasProps) => {
-
   const containerRef = useRef<HTMLDivElement>(null);
   const [tooltipState, setTooltipState] = useState<{
     show: boolean;
@@ -82,6 +80,13 @@ export const OfficeCanvas = ({
       if (deskWidth >= MIN_DESK_WIDTH && deskHeight >= MIN_DESK_HEIGHT) {
         const deskGraphics = createDeskWithEvents(desk);
         const text = createDeskText(desk, deskX, deskY, deskWidth, deskHeight);
+
+        // Add the same click event to the text element
+        if (desk.occupant) {
+          text.eventMode = "static";
+          text.cursor = "pointer";
+          text.on("click", (event) => handleDeskClick(event, desk));
+        }
 
         pixiContainerRef.current?.addChild(deskGraphics);
         pixiContainerRef.current?.addChild(text);
