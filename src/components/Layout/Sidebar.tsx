@@ -1,5 +1,5 @@
 import { InfoCircleFilled } from "@ant-design/icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Select, Input } from "antd";
 import {
   useGetAllTeams,
@@ -190,7 +190,9 @@ export const Sidebar = ({
             <div className="flex flex-col gap-2"></div>
           </div>
           <div className="text-sm font-pretendard font-bold">팀 지정</div>
-          <TeamDropdown key={deskId} deskId={deskId} />
+          <Suspense>
+            <TeamDropdown key={deskId} deskId={deskId} />
+          </Suspense>
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-full p-4 ">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Desk } from "../../types/desk";
 import { SearchBar } from "./SearchBar";
 import { DeskTooltip } from "../Tooltip/DeskTooltip";
@@ -100,11 +100,15 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
         />
       </div>
       {tooltipState.show && tooltipState.desk?.occupant && (
-        <DeskTooltip
-          occupant={tooltipState.desk.occupant}
-          position={tooltipState.position}
-          onClose={() => setTooltipState((prev) => ({ ...prev, show: false }))}
-        />
+        <Suspense>
+          <DeskTooltip
+            occupant={tooltipState.desk.occupant}
+            position={tooltipState.position}
+            onClose={() =>
+              setTooltipState((prev) => ({ ...prev, show: false }))
+            }
+          />
+        </Suspense>
       )}
     </div>
   );
