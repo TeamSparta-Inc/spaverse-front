@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { OfficeCanvas } from "../components/Canvas/OfficeCanvas";
 import { Lnb } from "../components/Layout/Lnb";
 import { ZoomControls } from "../components/Layout/ZoomControls";
@@ -37,7 +37,9 @@ export const ChangeSeatPage = () => {
           setSelectedDeskId={setSelectedDeskId}
         />
       </div>
-      <Sidebar isOpen={true} deskId={selectedDeskId} />
+      <Suspense>
+        <Sidebar isOpen={true} deskId={selectedDeskId} />
+      </Suspense>
       <ZoomControls />
     </>
   );

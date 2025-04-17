@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-query";
 import Axios from "../axios/instance";
 import { Team, User } from "../types/user";
+import { officeKeys } from "./office.query";
 
 export const userKeys = {
   all: ["user"] as const,
@@ -68,6 +69,12 @@ export const usePatchTeam = () =>
       Axios("patch", `/temp-offices/${officeName}/desks/${deskId}/team`, {
         data: { team_id: teamId },
       }),
+    onSuccess: () => {
+      const queryClient = useQueryClient();
+      queryClient.invalidateQueries({
+        queryKey: [officeKeys.all, userKeys.all],
+      });
+    },
   });
 
 export const useClearOccupant = (teamId: string) =>
