@@ -80,7 +80,7 @@ export const Gnb = () => {
               <button
                 className="flex p-2 justify-center items-center gap-2.5 rounded-md bg-slate-100 text-gray-600 hover:text-gray-900 text-[15px] leading-[22px] font-bold"
                 onClick={() => {
-                  navigate("/change-seats");
+                  navigate(`/change-seats/${officeName}`);
                 }}
               >
                 자리 바꾸기
