@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Modal, Input, message } from "antd";
 import { usePublishOffice } from "../../quries/office.query";
 import { OfficeName } from "../../constants/offices";
+import { toast } from "@teamsparta/stack-toast";
 
 export const Gnb = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export const Gnb = () => {
   const { mutate: publishOffice } = usePublishOffice();
 
   // 올바른 비밀번호 설정 (실제로는 환경변수나 서버에서 관리하는 것이 좋습니다)
-  const correctPassword = "1234"; // 예시 비밀번호
+  const correctPassword = "sparta99"; // 예시 비밀번호
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -27,15 +28,22 @@ export const Gnb = () => {
     // 비밀번호 검증
     if (inputValue === correctPassword) {
       setIsPasswordCorrect(true);
-      message.success("비밀번호가 확인되었습니다.");
       setIsModalVisible(false);
 
       // 비밀번호가 맞으면 원하는 동작 수행
       if (officeName) {
-        publishOffice({ officeName: officeName });
+        publishOffice(
+          { officeName },
+          {
+            onSuccess: () => {
+              toast.success("성공적으로 저장되었습니다");
+              navigate(`/change-seats/${officeName}`);
+            },
+          }
+        );
       }
     } else {
-      message.error("비밀번호가 일치하지 않습니다.");
+      toast.error("비밀번호가 일치하지 않습니다.");
       // 비밀번호가 틀려도 모달은 닫지 않음
     }
   };
@@ -84,7 +92,7 @@ export const Gnb = () => {
 
       {/* 모달 추가 */}
       <Modal
-        title="비밀 번호 입력"
+        title="비밀번호 입력"
         open={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -93,7 +101,7 @@ export const Gnb = () => {
       >
         <p className="mb-2">관리자 비밀번호를 입력해주세요:</p>
         <Input.Password
-          placeholder="비밀 번호를 입력해주세요."
+          placeholder="비밀번호를 입력해주세요."
           value={inputValue}
           onChange={handleInputChange}
           onPressEnter={handleOk}
