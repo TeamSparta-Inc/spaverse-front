@@ -90,13 +90,14 @@ export const createDeskText = (
 
   const text = new PIXI.Text(desk.occupant?.name || "-", {
     fontSize: 17,
-    fill: COLORS.TEXT,
+    fill: desk.occupant?.name ? COLORS.TEXT : COLORS.TEXT_EMPTY,
     fontFamily: "Pretendard",
     fontStyle: "normal",
     fontWeight: "600",
     lineHeight: 26,
     stroke: COLORS.TEXT_STROKE,
     strokeThickness: 2,
+    align: "center",
   });
 
   if (desk.occupant) {
