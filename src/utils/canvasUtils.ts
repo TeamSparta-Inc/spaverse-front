@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
-import { Desk, Team } from "../types/desk";
 import { CANVAS_CONSTANTS } from "../constants/canvas";
+import { Desk } from "../types/desk";
 import { Room } from "../types/room";
 
 export const drawGrid = (
