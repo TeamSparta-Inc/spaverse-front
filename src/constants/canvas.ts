@@ -13,5 +13,6 @@ export const CANVAS_CONSTANTS = {
     ROOM_FILL: 0xf6f9fa, // neutral-5
     ROOM_STROKE: 0xd7e0e6, // neutral-30
     BACKGROUND: 0xffffff,
+    OUTSIDE_BACKGROUND: 0x000000,
   },
 } as const;

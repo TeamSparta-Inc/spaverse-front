@@ -36,15 +36,14 @@ export const Gnb = () => {
           { officeName },
           {
             onSuccess: () => {
+              navigate(`/seating-chart/${officeName}`);
               toast.success("성공적으로 저장되었습니다");
-              navigate(`/change-seats/${officeName}`);
             },
           }
         );
       }
     } else {
       toast.error("비밀번호가 일치하지 않습니다.");
-      // 비밀번호가 틀려도 모달은 닫지 않음
     }
   };
 

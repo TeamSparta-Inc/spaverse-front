@@ -58,10 +58,25 @@ export const OfficeCanvas = ({
     const { CELL_WIDTH, CELL_HEIGHT, MIN_DESK_WIDTH, MIN_DESK_HEIGHT } =
       CANVAS_CONSTANTS;
 
-    // 배경 그리기
+    // 배경 그리기 (전체 viewport 크기로 확장)
     const background = new PIXI.Graphics();
     background.beginFill(CANVAS_CONSTANTS.COLORS.BACKGROUND);
-    background.drawRect(0, 0, columns * CELL_WIDTH, rows * CELL_HEIGHT);
+
+    // 캔버스 크기보다 더 넓은 영역으로 배경 확장 (앱 크기 또는 충분히 큰 값으로)
+    const viewportWidth = appRef.current.renderer.width;
+    const viewportHeight = appRef.current.renderer.height;
+    const canvasWidth = columns * CELL_WIDTH;
+    const canvasHeight = rows * CELL_HEIGHT;
+
+    // 더 큰 영역으로 배경 그리기 (캔버스 크기와 viewport 크기 중 더 큰 값)
+    const backgroundWidth = Math.max(viewportWidth, canvasWidth) * 2;
+    const backgroundHeight = Math.max(viewportHeight, canvasHeight) * 2;
+
+    // 중앙 정렬을 위해 오프셋 계산
+    const offsetX = (backgroundWidth - canvasWidth) / 2;
+    const offsetY = (backgroundHeight - canvasHeight) / 2;
+
+    background.drawRect(-offsetX, -offsetY, backgroundWidth, backgroundHeight);
     background.endFill();
     pixiContainerRef.current.addChild(background);
 
@@ -127,7 +142,9 @@ export const OfficeCanvas = ({
           <DeskTooltip
             occupant={tooltipState.desk.occupant}
             position={tooltipState.position}
-            onClose={() => setTooltipState((prev) => ({ ...prev, show: false }))}
+            onClose={() =>
+              setTooltipState((prev) => ({ ...prev, show: false }))
+            }
           />
         )}
     </div>

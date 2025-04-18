@@ -37,13 +37,15 @@ export const usePatchOccupant = () =>
       officeName,
       deskId,
       memberId,
+      jobTitle,
     }: {
       officeName: string;
       deskId: string;
-      memberId: string;
+      memberId?: string;
+      jobTitle?: string;
     }) =>
       Axios("patch", `/temp-offices/${officeName}/desks/${deskId}/occupant`, {
-        data: { clear: false, job_title: "", user_id: memberId },
+        data: { clear: false, job_title: jobTitle, user_id: memberId },
       }),
   });
 

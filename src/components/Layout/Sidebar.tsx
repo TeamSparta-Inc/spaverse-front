@@ -84,6 +84,23 @@ const TeamDropdown = ({ deskId }: { deskId: string }) => {
     setCustomMemberName(e.target.value);
   };
 
+  const handleCustomMemberNameBlur = () => {
+    patchOccupant(
+      {
+        officeName: officeName || "",
+        deskId: deskId,
+        jobTitle: customMemberName,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: officeKeys.tempOffice(officeName as OfficeName),
+          });
+        },
+      }
+    );
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <Select
@@ -136,7 +153,9 @@ const TeamDropdown = ({ deskId }: { deskId: string }) => {
             <Input
               placeholder="표시할 이름을 작성해주세요"
               value={customMemberName}
+              maxLength={4}
               onChange={handleCustomMemberNameChange}
+              onBlur={handleCustomMemberNameBlur}
               style={{ marginTop: "8px" }}
             />
           )}
