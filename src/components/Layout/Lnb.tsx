@@ -73,7 +73,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
 
   return (
     <div className="z-10">
-      <div className="absolute left-4 w-[200px] bg-white rounded-lg shadow-lg">
+      <div className="absolute left-4 top-[24px] w-[200px] bg-white rounded-lg shadow-lg">
         <div className="flex flex-col">
           {OFFICE_NAMES.map((office, index) => (
             <div
@@ -95,7 +95,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
           ))}
         </div>
       </div>
-      <div className="absolute left-4 top-[230px] w-[200px] bg-white rounded-lg shadow-lg">
+      <div className="absolute left-4 top-[254px] w-[200px] bg-white rounded-lg shadow-lg">
         <SearchBar
           value={searchText}
           onChange={(value) => setSearchText(value)}
