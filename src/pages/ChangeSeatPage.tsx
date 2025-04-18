@@ -35,6 +35,7 @@ export const ChangeSeatPage = () => {
           rooms={rooms}
           selectedDeskId={selectedDeskId}
           setSelectedDeskId={setSelectedDeskId}
+          isChangeSeatPage={true}
         />
       </div>
       <Suspense>

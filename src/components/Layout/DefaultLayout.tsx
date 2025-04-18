@@ -9,7 +9,7 @@ export const DefaultLayout = () => {
       <div className="flex flex-col w-screen min-h-dvh p-0 m-0">
         <Gnb />
         <Toaster />
-        <div className="flex flex-1 mt-12 relative">
+        <div className="flex flex-1 relative">
           <Outlet />
         </div>
       </div>
