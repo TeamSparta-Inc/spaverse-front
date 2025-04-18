@@ -1,5 +1,5 @@
 import { Suspense, useState } from "react";
-import { OfficeCanvas } from "../components/Canvas/OfficeCanvas";
+import { OfficeCanvasContainer } from "../components/Canvas/OfficeCanvasContainer";
 import { Lnb } from "../components/Layout/Lnb";
 import { ZoomControls } from "../components/Layout/ZoomControls";
 
@@ -27,17 +27,11 @@ export const ChangeSeatPage = () => {
   return (
     <>
       <Lnb desks={desks} onDeskSelect={handleDeskSelect} />
-      <div className="flex-1 relative">
-        <OfficeCanvas
-          columns={37}
-          rows={73}
-          desks={desks}
-          rooms={rooms}
-          selectedDeskId={selectedDeskId}
-          setSelectedDeskId={setSelectedDeskId}
-          isChangeSeatPage={true}
-        />
-      </div>
+      <OfficeCanvasContainer
+        selectedDeskId={selectedDeskId}
+        setSelectedDeskId={setSelectedDeskId}
+        isChangeSeatPage={true}
+      />
       <Suspense>
         <Sidebar isOpen={true} deskId={selectedDeskId} />
       </Suspense>

@@ -25,7 +25,11 @@ export const SeatingChartPage = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Lnb desks={desks} onDeskSelect={handleDeskSelect} />
-      <OfficeCanvasContainer selectedDeskId={selectedDeskId} />
+      <OfficeCanvasContainer
+        selectedDeskId={selectedDeskId}
+        setSelectedDeskId={setSelectedDeskId}
+        isChangeSeatPage={false}
+      />
       <ZoomControls />
     </Suspense>
   );
