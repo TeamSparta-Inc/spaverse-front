@@ -33,7 +33,7 @@ export const useGetAllTeams = () => useSuspenseQuery(userQuery.allTeams());
 export const useGetTeamUsers = (teamId: string) =>
   useSuspenseQuery(userQuery.teamUsers(teamId));
 
-export const usePatchOccupant = (teamId: string) =>
+export const usePatchOccupant = () =>
   useMutation({
     mutationFn: ({
       officeName,
@@ -47,12 +47,6 @@ export const usePatchOccupant = (teamId: string) =>
       Axios("patch", `/temp-offices/${officeName}/desks/${deskId}/occupant`, {
         data: { clear: false, job_title: "", user_id: memberId },
       }),
-    onSuccess: () => {
-      const queryClient = useQueryClient();
-      queryClient.invalidateQueries({
-        queryKey: userKeys.teamUsers(teamId),
-      });
-    },
   });
 
 export const usePatchTeam = () =>
@@ -69,15 +63,9 @@ export const usePatchTeam = () =>
       Axios("patch", `/temp-offices/${officeName}/desks/${deskId}/team`, {
         data: { team_id: teamId },
       }),
-    onSuccess: () => {
-      const queryClient = useQueryClient();
-      queryClient.invalidateQueries({
-        queryKey: [officeKeys.all, userKeys.all],
-      });
-    },
   });
 
-export const useClearOccupant = (teamId: string) =>
+export const useClearOccupant = () =>
   useMutation({
     mutationFn: ({
       officeName,
@@ -89,10 +77,4 @@ export const useClearOccupant = (teamId: string) =>
       Axios("patch", `/temp-offices/${officeName}/desks/${deskId}/occupant`, {
         data: { memberId: null },
       }),
-    onSuccess: () => {
-      const queryClient = useQueryClient();
-      queryClient.invalidateQueries({
-        queryKey: userKeys.teamUsers(teamId),
-      });
-    },
   });

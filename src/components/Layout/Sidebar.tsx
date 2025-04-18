@@ -8,6 +8,9 @@ import {
   usePatchOccupant,
   usePatchTeam,
 } from "../../quries/user.query";
+import { useQueryClient } from "@tanstack/react-query";
+import { officeKeys } from "../../quries/office.query";
+import { OfficeName } from "../../constants/offices";
 
 const TeamDropdown = ({ deskId }: { deskId: string }) => {
   const [, setSelectedTeam] = useState<string | null>(null);
@@ -21,8 +24,9 @@ const TeamDropdown = ({ deskId }: { deskId: string }) => {
   const { officeName } = useParams<{ officeName: string }>();
   const { data: teams } = useGetAllTeams();
   const { data: teamUsers } = useGetTeamUsers(selectedTeamKey);
-  const { mutate: patchOccupant } = usePatchOccupant(selectedTeamKey);
+  const { mutate: patchOccupant } = usePatchOccupant();
   const { mutate: patchTeam } = usePatchTeam();
+  const queryClient = useQueryClient();
 
   const handleTeamSelect = (value: string) => {
     setSelectedTeamKey(value);
@@ -33,11 +37,22 @@ const TeamDropdown = ({ deskId }: { deskId: string }) => {
     setSelectedMember(null);
     setIsCustomMember(false);
     setCustomMemberName("");
-    patchTeam({
-      officeName: officeName || "",
-      deskId: deskId,
-      teamId: value,
-    });
+    console.log("Team selected:", value);
+    patchTeam(
+      {
+        officeName: officeName || "",
+        deskId: deskId,
+        teamId: value,
+      },
+      {
+        onSuccess: () => {
+          console.log("Team patch request settled");
+          queryClient.invalidateQueries({
+            queryKey: officeKeys.tempOffice(officeName as OfficeName),
+          });
+        },
+      }
+    );
   };
 
   const handleMemberSelect = (value: string) => {
@@ -48,11 +63,21 @@ const TeamDropdown = ({ deskId }: { deskId: string }) => {
       setIsCustomMember(false);
       setSelectedMember(value);
     }
-    patchOccupant({
-      officeName: officeName || "",
-      deskId: deskId,
-      memberId: value,
-    });
+    patchOccupant(
+      {
+        officeName: officeName || "",
+        deskId: deskId,
+        memberId: value,
+      },
+      {
+        onSuccess: () => {
+          console.log("Occupant patch request settled");
+          queryClient.invalidateQueries({
+            queryKey: officeKeys.tempOffice(officeName as OfficeName),
+          });
+        },
+      }
+    );
   };
 
   const handleCustomMemberNameChange = (
