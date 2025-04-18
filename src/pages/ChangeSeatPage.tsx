@@ -26,7 +26,9 @@ export const ChangeSeatPage = () => {
 
   return (
     <>
-      <Lnb desks={desks} onDeskSelect={handleDeskSelect} />
+      <Suspense>
+        <Lnb desks={desks} onDeskSelect={handleDeskSelect} />
+      </Suspense>
       <OfficeCanvasContainer
         selectedDeskId={selectedDeskId}
         setSelectedDeskId={setSelectedDeskId}

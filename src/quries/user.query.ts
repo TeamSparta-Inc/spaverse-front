@@ -10,6 +10,7 @@ export const userKeys = {
   all: ["user"] as const,
   allTeams: () => [...userKeys.all, "teams"] as const,
   teamUsers: (teamId: string) => [...userKeys.allTeams(), teamId] as const,
+  allUsers: () => [...userKeys.all, "users"] as const,
 };
 
 export const userQuery = {
@@ -24,9 +25,15 @@ export const userQuery = {
       queryFn: () => Axios("get", `/teams/${teamId}/users`),
       enabled: !!teamId,
     }),
+  allUsers: () =>
+    queryOptions<User[]>({
+      queryKey: userKeys.allUsers(),
+      queryFn: () => Axios("get", `/users`),
+    }),
 };
 
 export const useGetAllTeams = () => useSuspenseQuery(userQuery.allTeams());
+export const useGetAllUsers = () => useSuspenseQuery(userQuery.allUsers());
 
 export const useGetTeamUsers = (teamId: string) =>
   useSuspenseQuery(userQuery.teamUsers(teamId));

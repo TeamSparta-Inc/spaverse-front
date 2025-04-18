@@ -10,7 +10,7 @@ export const CANVAS_CONSTANTS = {
     DESK_STROKE: 0x8fc9ff,
     TEXT: "#141617",
     TEXT_STROKE: "#ffffff",
-    ROOM_FILL: 0xf6f9fa, // neutral-5
+    ROOM_FILL: 0xe4ebf0, // neutral-5
     ROOM_STROKE: 0xd7e0e6, // neutral-30
     BACKGROUND: 0xffffff,
     OUTSIDE_BACKGROUND: 0x000000,

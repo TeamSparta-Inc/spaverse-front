@@ -5,6 +5,7 @@ import { DeskTooltip } from "../Tooltip/DeskTooltip";
 import { OFFICE_NAMES, OfficeName } from "../../constants/offices";
 import { useNavigate, useLocation } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
+import { useGetAllUsers } from "../../quries/user.query";
 
 interface LnbProps {
   desks: Desk[];
@@ -33,6 +34,8 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
       return match ? (match[2] as OfficeName) : null;
     }
   );
+
+  // const { data: users } = useGetAllUsers();
 
   const filteredDesks = desks.filter((desk) => {
     const searchLower = searchText.toLowerCase();
@@ -87,7 +90,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
                 selectedOffice === office.id ? "text-red-500" : "text-[#81898F]"
               }`}
             >
-              <span style={{ fontFamily: 'Pretendard' }}>{office.label}</span>
+              <span style={{ fontFamily: "Pretendard" }}>{office.label}</span>
               {selectedOffice === office.id && (
                 <CheckOutlined className="text-red-500" />
               )}

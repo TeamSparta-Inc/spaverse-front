@@ -51,7 +51,7 @@ export const usePixiApp = (
     appRef.current = new PIXI.Application({
       width,
       height,
-      backgroundColor: 0xffffff,
+      backgroundColor: 0xd7e0e6,
       antialias: true,
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,

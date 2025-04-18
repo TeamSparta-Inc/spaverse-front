@@ -60,7 +60,7 @@ export const OfficeCanvas = ({
 
     // 배경 그리기 (전체 viewport 크기로 확장)
     const background = new PIXI.Graphics();
-    background.beginFill(CANVAS_CONSTANTS.COLORS.BACKGROUND);
+    background.beginFill(0xf6f9fa);
 
     // 캔버스 크기보다 더 넓은 영역으로 배경 확장 (앱 크기 또는 충분히 큰 값으로)
     const viewportWidth = appRef.current.renderer.width;
@@ -69,8 +69,8 @@ export const OfficeCanvas = ({
     const canvasHeight = rows * CELL_HEIGHT;
 
     // 더 큰 영역으로 배경 그리기 (캔버스 크기와 viewport 크기 중 더 큰 값)
-    const backgroundWidth = Math.max(viewportWidth, canvasWidth) * 2;
-    const backgroundHeight = Math.max(viewportHeight, canvasHeight) * 2;
+    const backgroundWidth = Math.max(viewportWidth, canvasWidth) * 1.3;
+    const backgroundHeight = Math.max(viewportHeight, canvasHeight) * 1.4;
 
     // 중앙 정렬을 위해 오프셋 계산
     const offsetX = (backgroundWidth - canvasWidth) / 2;
