@@ -21,7 +21,7 @@ export type CustomError = AxiosError<ErrorResponse>;
 export type HttpMethod = "get" | "post" | "put" | "patch" | "delete";
 
 const instance = axios.create({
-  baseURL: "http://api-spaverse.spartacodingclub.kr/api/v1",
+  baseURL: "https://api-spaverse.spartacodingclub.kr/api/v1",
 });
 
 const request = async (
