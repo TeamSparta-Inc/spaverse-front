@@ -62,7 +62,7 @@ export const createDeskGraphics = (
     const badgeRadius = 8;
 
     //TODO: 팀 색깔 정하기
-    const colors = TEAM_COLORS[desk.occupant.team] ?? TEAM_COLORS["미지정"];
+    const colors = TEAM_COLORS[desk.occupant.team] ?? TEAM_COLORS["-"];
 
     badge.beginFill(colors.primary);
     badge.lineStyle(1, 0xffffff);
@@ -114,62 +114,68 @@ export const createDeskText = (
   return text;
 };
 
-export const TEAM_COLORS: Record<Team, { primary: string }> = {
-  스코클팀: {
+export const TEAM_COLORS: Record<string, { primary: string }> = {
+  B2B팀: {
     primary: "#FF8026",
   },
-  디자인팀: {
+  재무팀: {
     primary: "#ACF2AC",
   },
-  개발팀: {
+  스튜디오팀: {
     primary: "#B70D23",
   },
-  내배캠팀: {
+  게임팀: {
     primary: "#FFBAC4",
   },
-  마케팅팀: {
+  PM팀: {
     primary: "#008000",
   },
-  항해팀: {
+  "B2C 교육운영팀": {
     primary: "#82E8DE",
   },
-  CX팀: {
+  "브랜드 콘텐츠팀": {
     primary: "#FFBE8F",
   },
-  대외협력팀: {
+  피플팀: {
     primary: "#26CE75",
   },
-  피플팀: {
+  "그로스 마케팅팀": {
     primary: "#FFDEA6",
   },
-  재무팀: {
+  "B2G 교육기획팀": {
     primary: "#1F94DC",
   },
-  콘텐츠팀: {
+  "KDT 커리어개발팀": {
+    primary: "#681FDC",
+  },
+  "KDT 교육운영팀": {
+    primary: "#BED417",
+  },
+  CX팀: {
+    primary: "#BC50E4",
+  },
+  일본팀: {
+    primary: "#37A28C",
+  },
+  "B2C 교육기획팀": {
     primary: "#681FDC",
   },
   외주팀: {
-    primary: "#BED417",
-  },
-  게임팀: {
-    primary: "#BC50E4",
-  },
-  커리어개발팀: {
-    primary: "#37A28C",
-  },
-  글로벌팀: {
-    primary: "#681FDC",
-  },
-  직속팀: {
     primary: "#A54E0B",
   },
-  B2B팀: {
+  세일즈팀: {
     primary: "#DC1F87",
   },
-  스튜디오팀: {
+  "콘텐츠 프로듀싱팀": {
     primary: "#1D519F",
   },
-  미지정: {
+  개발팀: {
+    primary: "#A5456B",
+  },
+  디자인팀: {
+    primary: "#2E47",
+  },
+  "-": {
     primary: "#9DA7AE",
   },
 };
