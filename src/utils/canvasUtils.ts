@@ -2,7 +2,6 @@ import * as PIXI from "pixi.js";
 import { Desk, Team } from "../types/desk";
 import { CANVAS_CONSTANTS } from "../constants/canvas";
 import { Room } from "../types/room";
-import { Text } from "@teamsparta/stack-text";
 
 export const drawGrid = (
   graphics: PIXI.Graphics,
