@@ -1,5 +1,5 @@
 import { Suspense, useState } from "react";
-import { Desk } from "../../types/desk";
+import { Desk, Team } from "../../types/desk";
 import { SearchBar } from "./SearchBar";
 import { DeskTooltip } from "../Tooltip/DeskTooltip";
 import { OFFICE_NAMES, OfficeName } from "../../constants/offices";
@@ -36,10 +36,16 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
 
   const filteredDesks = desks.filter((desk) => {
     const searchLower = searchText.toLowerCase();
-    return (
-      desk.occupant?.name?.toLowerCase().includes(searchLower) ||
-      desk.occupant?.team?.toLowerCase().includes(searchLower)
-    );
+
+    if (searchText) {
+      return (
+        (desk.occupant?.name?.toLowerCase().includes(searchLower) ||
+          desk.occupant?.team?.toLowerCase().includes(searchLower)) &&
+        desk.occupant?.team !== ("Unknown Team" as Team)
+      );
+    }
+
+    return true;
   });
 
   const handleDeskClick = (desk: Desk, event: React.MouseEvent) => {

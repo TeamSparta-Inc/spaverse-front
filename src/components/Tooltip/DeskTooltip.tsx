@@ -3,6 +3,7 @@ import { Occupant } from "../../types/desk";
 import { vars } from "@teamsparta/stack-tokens";
 import { Text } from "@teamsparta/stack-text";
 import { Tag } from "@teamsparta/stack-tag";
+
 interface DeskTooltipProps {
   occupant: Occupant;
   position: { x: number; y: number };
@@ -32,14 +33,18 @@ export const DeskTooltip = ({
     };
   }, [onClose]);
 
+  // 검색 결과를 통해 클릭된 경우에 대한 위치 조정
+  const tooltipStyle = {
+    left: position.x,
+    top: position.y - 10,
+    transform: "translate(-50%, -100%)",
+  };
+
   return (
     <div
       ref={tooltipRef}
-      className="fixed z-50 bg-white shadow-elevation-1 rounded-lg p-4 min-w-[200px]"
-      style={{
-        left: position.x,
-        top: position.y,
-      }}
+      className="fixed z-50 bg-white shadow-elevation-1 rounded-lg p-4 min-w-[200px] after:content-[''] after:absolute after:left-1/2 after:bottom-[-8px] after:-translate-x-1/2 after:border-8 after:border-transparent after:border-t-white"
+      style={tooltipStyle}
     >
       <div className="flex gap-4">
         <div className="w-[54px] h-[54px] bg-gray-100 overflow-hidden">
