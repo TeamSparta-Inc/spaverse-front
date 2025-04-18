@@ -15,7 +15,7 @@ import { OfficeName } from "../../constants/offices";
 const TeamDropdown = ({ deskId }: { deskId: string }) => {
   const [, setSelectedTeam] = useState<string | null>(null);
   const [selectedTeamKey, setSelectedTeamKey] = useState<string>(
-    "64d35eb339e9cbd2505cecfb"
+    "68023cf73b983bc8e6350cff"
   );
   const [selectedMember, setSelectedMember] = useState<string | null>(null);
   const [isCustomMember, setIsCustomMember] = useState<boolean>(false);

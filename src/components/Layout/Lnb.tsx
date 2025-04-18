@@ -5,7 +5,6 @@ import { DeskTooltip } from "../Tooltip/DeskTooltip";
 import { OFFICE_NAMES, OfficeName } from "../../constants/offices";
 import { useNavigate, useLocation } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
-import { useGetAllUsers } from "../../quries/user.query";
 
 interface LnbProps {
   desks: Desk[];
