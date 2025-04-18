@@ -87,7 +87,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
                 selectedOffice === office.id ? "text-red-500" : "text-[#81898F]"
               }`}
             >
-              <span>{office.label}</span>
+              <span style={{ fontFamily: 'Pretendard' }}>{office.label}</span>
               {selectedOffice === office.id && (
                 <CheckOutlined className="text-red-500" />
               )}

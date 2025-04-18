@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Occupant } from "../../types/desk";
+import { Occupant, Team } from "../../types/desk";
 import { vars } from "@teamsparta/stack-tokens";
 import { Text } from "@teamsparta/stack-text";
 import { Tag } from "@teamsparta/stack-tag";
@@ -68,7 +68,7 @@ export const DeskTooltip = ({
               {occupant.name}
             </Text>
             <Tag size="md" color="primary">
-              {occupant.team}
+              {occupant.team === "Unknown Team" as Team ? "비어있음" : occupant.team}
             </Tag>
           </div>
           <div className="text-sm text-text-secondary mt-1">

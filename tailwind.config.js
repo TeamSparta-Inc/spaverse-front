@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        pretendard: ["Pretendard", "sans-serif"],
+      },
       colors: {
         brand: {
           strong: "var(--stack-semantic-brand-strong)",

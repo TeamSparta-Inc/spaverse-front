@@ -2,6 +2,7 @@ import * as PIXI from "pixi.js";
 import { Desk, Team } from "../types/desk";
 import { CANVAS_CONSTANTS } from "../constants/canvas";
 import { Room } from "../types/room";
+import { Text } from "@teamsparta/stack-text";
 
 export const drawGrid = (
   graphics: PIXI.Graphics,
@@ -193,11 +194,11 @@ export const createRoomGraphics = (room: Room): PIXI.Container => {
 
   // 방 이름 텍스트
   const text = new PIXI.Text(room.room_name, {
-    fontSize: 22,
+    fontSize: 16,
     fill: "#81898f",
     fontFamily: "Pretendard",
     align: "center",
-    fontWeight: "700",
+    fontWeight: "600",
   });
 
   text.position.set(roomX + roomWidth / 2 - text.width / 2, roomY + 10);
