@@ -99,7 +99,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
         <SearchBar
           value={searchText}
           onChange={(value) => setSearchText(value)}
-          placeholder="팀/이름으로 검색"
+          placeholder="팀명 또는 이름으로 검색"
           searchText={searchText}
           filteredDesks={filteredDesks}
           onDeskSelect={(desk, event) => handleDeskClick(desk, event)}
