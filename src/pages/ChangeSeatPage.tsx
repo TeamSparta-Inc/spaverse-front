@@ -18,7 +18,7 @@ export const ChangeSeatPage = () => {
 
   const { data: finalOffice } = useGetTempOffice(officeName);
   const desks = finalOffice?.desks || [];
-  const rooms = finalOffice?.rooms || [];
+  // const rooms = finalOffice?.rooms || [];
   const handleDeskSelect = (deskId: string) => {
     setSelectedDeskId(deskId);
     setScale(1.5); // 선택된 책상 확대
