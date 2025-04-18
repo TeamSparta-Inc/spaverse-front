@@ -1,12 +1,10 @@
 import {
   queryOptions,
   useMutation,
-  useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import Axios from "../axios/instance";
 import { Team, User } from "../types/user";
-import { officeKeys } from "./office.query";
 
 export const userKeys = {
   all: ["user"] as const,
