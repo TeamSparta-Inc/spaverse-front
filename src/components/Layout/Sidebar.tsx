@@ -1,13 +1,13 @@
 import { InfoCircleFilled } from "@ant-design/icons";
-import { useState, useEffect, Suspense } from "react";
-import { Select, Input } from "antd";
+import { Input, Select } from "antd";
+import { Suspense, useState } from "react";
+import { useParams } from "react-router-dom";
 import {
   useGetAllTeams,
   useGetTeamUsers,
   usePatchOccupant,
   usePatchTeam,
 } from "../../quries/user.query";
-import { useParams } from "react-router-dom";
 
 const TeamDropdown = ({ deskId }: { deskId: string }) => {
   const [, setSelectedTeam] = useState<string | null>(null);
@@ -17,55 +17,12 @@ const TeamDropdown = ({ deskId }: { deskId: string }) => {
   const [selectedMember, setSelectedMember] = useState<string | null>(null);
   const [isCustomMember, setIsCustomMember] = useState<boolean>(false);
   const [customMemberName, setCustomMemberName] = useState<string>("");
-  const [isSaving, setIsSaving] = useState<boolean>(false);
 
   const { officeName } = useParams<{ officeName: string }>();
   const { data: teams } = useGetAllTeams();
   const { data: teamUsers } = useGetTeamUsers(selectedTeamKey);
   const { mutate: patchOccupant } = usePatchOccupant(selectedTeamKey);
   const { mutate: patchTeam } = usePatchTeam();
-  useEffect(() => {
-    if (!selectedTeamKey) return;
-
-    const timer = setTimeout(() => {
-      saveChangesToServer();
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [selectedTeamKey, selectedMember, customMemberName]);
-
-  const saveChangesToServer = async () => {
-    if (isSaving) return;
-
-    try {
-      setIsSaving(true);
-
-      const data: any = {
-        team: selectedTeamKey,
-      };
-
-      if (selectedMember === "custom" && customMemberName) {
-        data.member = {
-          id: "custom",
-          name: customMemberName,
-          isCustom: true,
-        };
-      } else if (selectedMember && selectedMember !== "custom") {
-        const member = teamUsers?.find((m) => m._id === selectedMember);
-        if (member) {
-          data.member = {
-            id: member._id,
-            name: member.name,
-            isCustom: false,
-          };
-        }
-      }
-    } catch (error) {
-      console.error("자동 저장 실패:", error);
-    } finally {
-      setIsSaving(false);
-    }
-  };
 
   const handleTeamSelect = (value: string) => {
     setSelectedTeamKey(value);
