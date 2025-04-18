@@ -91,6 +91,18 @@ export const usePixiApp = (
       appRef.current.stage.cursor = "grab";
     };
 
+    // 터치패드 휠 이벤트 처리 함수
+    const handleWheel = (event: WheelEvent) => {
+      if (!pixiContainerRef.current) return;
+
+      // 기본 스크롤 동작 방지
+      event.preventDefault();
+
+      // deltaX와 deltaY를 사용하여 캔버스 이동
+      pixiContainerRef.current.position.x -= event.deltaX;
+      pixiContainerRef.current.position.y -= event.deltaY;
+    };
+
     // 이벤트 리스너 등록
     appRef.current.stage.eventMode = "static";
     appRef.current.stage
@@ -106,9 +118,15 @@ export const usePixiApp = (
       .on("touchend", handleDragEnd)
       .on("touchendoutside", handleDragEnd);
 
+    // 휠 이벤트 리스너 추가
+    canvas.addEventListener("wheel", handleWheel, { passive: false });
+
     return () => {
       // 이벤트 리스너 제거
       if (appRef.current) {
+        const canvas = appRef.current.view as HTMLCanvasElement;
+        canvas.removeEventListener("wheel", handleWheel);
+
         appRef.current.stage
           .off("pointerdown", handleDragStart)
           .off("pointermove", handleDragMove)
