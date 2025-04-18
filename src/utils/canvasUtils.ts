@@ -200,7 +200,8 @@ export const createRoomGraphics = (room: Room): PIXI.Container => {
     fontWeight: "600",
   });
 
-  text.position.set(roomX + roomWidth / 2 - text.width / 2, roomY + 10);
+  text.anchor.set(0.5);
+  text.position.set(roomX + roomWidth / 2, roomY + roomHeight / 2);
 
   container.addChild(roomGraphics);
   container.addChild(text);

@@ -48,19 +48,23 @@ export const DeskTooltip = ({
     >
       <div className="flex gap-4">
         <div className="w-[54px] h-[54px] bg-gray-100 overflow-hidden">
-          <div className="w-full h-full flex items-center justify-center bg-blue-40 text-white rounded">
+          {/* <div className="w-full h-full flex items-center justify-center bg-blue-40 text-white rounded">
             {occupant.name.charAt(0)}
-          </div>
-          {/* TODO: 슬랙 이미지 추가 시 사용 */}
-          {/* {occupant.slackImageUrl ? (
+          </div> */}
+
+          {occupant.slackImageUrl ? (
             <img
-              src={occupant.slackImageUrl}
+              src={`https://static.spartacodingclub.kr/samsam/user/${occupant.slackImageUrl}`}
               alt={occupant.name}
               className="w-full h-full object-cover"
             />
           ) : (
-            
-          )} */}
+            <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded">
+              <Text as="p" font="captionM" color={vars.text.tertiary}>
+                {occupant.name.charAt(0)}
+              </Text>
+            </div>
+          )}
         </div>
         <div>
           <div className="flex items-center justify-between">
@@ -68,7 +72,9 @@ export const DeskTooltip = ({
               {occupant.name}
             </Text>
             <Tag size="md" color="primary">
-              {occupant.team === "Unknown Team" as Team ? "비어있음" : occupant.team}
+              {occupant.team === ("Unknown Team" as Team)
+                ? "비어있음"
+                : occupant.team}
             </Tag>
           </div>
           <div className="text-sm text-text-secondary mt-1">
