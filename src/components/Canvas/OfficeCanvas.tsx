@@ -19,6 +19,7 @@ interface OfficeCanvasProps {
   rooms: Room[];
   selectedDeskId?: string | null;
   setSelectedDeskId?: (deskId: string) => void;
+  isChangeSeatPage?: boolean;
 }
 
 export const OfficeCanvas = ({
@@ -28,6 +29,7 @@ export const OfficeCanvas = ({
   rooms = [],
   selectedDeskId,
   setSelectedDeskId,
+  isChangeSeatPage = false,
 }: OfficeCanvasProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tooltipState, setTooltipState] = useState<{
@@ -119,13 +121,15 @@ export const OfficeCanvas = ({
 
   return (
     <div ref={containerRef} className="relative w-full h-full">
-      {tooltipState.show && tooltipState.desk?.occupant && (
-        <DeskTooltip
-          occupant={tooltipState.desk.occupant}
-          position={tooltipState.position}
-          onClose={() => setTooltipState((prev) => ({ ...prev, show: false }))}
-        />
-      )}
+      {tooltipState.show &&
+        tooltipState.desk?.occupant &&
+        !isChangeSeatPage && (
+          <DeskTooltip
+            occupant={tooltipState.desk.occupant}
+            position={tooltipState.position}
+            onClose={() => setTooltipState((prev) => ({ ...prev, show: false }))}
+          />
+        )}
     </div>
   );
 };
