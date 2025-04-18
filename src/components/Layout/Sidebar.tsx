@@ -14,16 +14,16 @@ import { OfficeName } from "../../constants/offices";
 
 const TeamDropdown = ({ deskId }: { deskId: string }) => {
   const [, setSelectedTeam] = useState<string | null>(null);
-  const [selectedTeamKey, setSelectedTeamKey] = useState<string>(
-    "68023cf73b983bc8e6350cff"
-  );
+  const [selectedTeamKey, setSelectedTeamKey] = useState<string>();
   const [selectedMember, setSelectedMember] = useState<string | null>(null);
   const [isCustomMember, setIsCustomMember] = useState<boolean>(false);
   const [customMemberName, setCustomMemberName] = useState<string>("");
 
   const { officeName } = useParams<{ officeName: string }>();
   const { data: teams } = useGetAllTeams();
-  const { data: teamUsers } = useGetTeamUsers(selectedTeamKey);
+  const { data: teamUsers } = useGetTeamUsers(
+    selectedTeamKey ?? "68023cf73b983bc8e6350cff"
+  );
   const { mutate: patchOccupant } = usePatchOccupant();
   const { mutate: patchTeam } = usePatchTeam();
   const queryClient = useQueryClient();
