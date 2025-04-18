@@ -123,7 +123,7 @@ export const TEAM_COLORS: Record<string, { primary: string }> = {
     primary: "#ACF2AC",
   },
   스튜디오팀: {
-    primary: "#B70D23",
+    primary: "#A5456B",
   },
   게임팀: {
     primary: "#FFBAC4",
@@ -171,7 +171,7 @@ export const TEAM_COLORS: Record<string, { primary: string }> = {
     primary: "#1D519F",
   },
   개발팀: {
-    primary: "#A5456B",
+    primary: "#B70D23",
   },
   디자인팀: {
     primary: "#2E47",
