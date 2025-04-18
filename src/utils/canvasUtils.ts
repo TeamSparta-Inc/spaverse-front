@@ -88,7 +88,7 @@ export const createDeskText = (
 ): PIXI.Text => {
   const { COLORS } = CANVAS_CONSTANTS;
 
-  const text = new PIXI.Text(desk.occupant?.name || "(공석)", {
+  const text = new PIXI.Text(desk.occupant?.name || "-", {
     fontSize: 17,
     fill: COLORS.TEXT,
     fontFamily: "Pretendard",
