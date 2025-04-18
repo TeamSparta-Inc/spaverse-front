@@ -45,7 +45,7 @@ export const usePatchOccupant = (teamId: string) =>
       memberId: string;
     }) =>
       Axios("patch", `/temp-offices/${officeName}/desks/${deskId}/occupant`, {
-        data: { memberId },
+        data: { clear: false, job_title: "", user_id: memberId },
       }),
     onSuccess: () => {
       const queryClient = useQueryClient();
