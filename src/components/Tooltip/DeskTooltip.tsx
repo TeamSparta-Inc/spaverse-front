@@ -1,5 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Occupant } from "../../types/desk";
+import { vars } from "@teamsparta/stack-tokens";
+import { Text } from "@teamsparta/stack-text";
+import { Tag } from "@teamsparta/stack-tag";
 interface DeskTooltipProps {
   occupant: Occupant;
   position: { x: number; y: number };
@@ -39,35 +42,34 @@ export const DeskTooltip = ({
       }}
     >
       <div className="flex gap-4">
-        <div className="w-[52px] h-[52px] rounded-full bg-gray-100 overflow-hidden">
-          {occupant.slackImageUrl ? (
+        <div className="w-[54px] h-[54px] bg-gray-100 overflow-hidden">
+          <div className="w-full h-full flex items-center justify-center bg-blue-40 text-white rounded">
+            {occupant.name.charAt(0)}
+          </div>
+          {/* TODO: 슬랙 이미지 추가 시 사용 */}
+          {/* {occupant.slackImageUrl ? (
             <img
               src={occupant.slackImageUrl}
               alt={occupant.name}
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-blue-40 text-white">
-              {occupant.name.charAt(0)}
-            </div>
-          )}
+            
+          )} */}
         </div>
         <div>
           <div className="flex items-center justify-between">
-            <h3 className="font-medium text-text-primary">{occupant.name}</h3>
-            <span className="text-sm text-text-secondary ml-2">
+            <Text as="p" font="subTitle2" color={vars.text.primary}>
+              {occupant.name}
+            </Text>
+            <Tag size="md" color="primary">
               {occupant.team}
-            </span>
+            </Tag>
           </div>
           <div className="text-sm text-text-secondary mt-1">
-            <span>
-              {/* {
-                OFFICE_NAMES.find((office) => office.id === occupant.office)
-                  ?.label
-              } */}
-            </span>
-            <span className="mx-2">|</span>
-            <span>{occupant.email}</span>
+            <Text as="p" font="captionM" color={vars.text.tertiary}>
+              {occupant.email}
+            </Text>
           </div>
         </div>
       </div>

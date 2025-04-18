@@ -14,6 +14,8 @@
     "@pixi/react": "7",
     "@tanstack/react-query": "^5.66.9",
     "@teamsparta/stack-core": "^1.0.4",
+    "@teamsparta/stack-tag": "^0.1.2",
+    "@teamsparta/stack-text": "^1.0.13",
     "@teamsparta/stack-toast": "^1.0.8",
     "@teamsparta/stack-tokens": "^1.1.0",
     "antd": "^5.22.7",
