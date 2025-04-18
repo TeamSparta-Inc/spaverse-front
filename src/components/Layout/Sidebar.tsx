@@ -46,7 +46,6 @@ const TeamDropdown = ({ deskId }: { deskId: string }) => {
       },
       {
         onSuccess: () => {
-          console.log("Team patch request settled");
           queryClient.invalidateQueries({
             queryKey: officeKeys.tempOffice(officeName as OfficeName),
           });
@@ -71,7 +70,6 @@ const TeamDropdown = ({ deskId }: { deskId: string }) => {
       },
       {
         onSuccess: () => {
-          console.log("Occupant patch request settled");
           queryClient.invalidateQueries({
             queryKey: officeKeys.tempOffice(officeName as OfficeName),
           });
