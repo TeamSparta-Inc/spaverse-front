@@ -5,6 +5,7 @@ import { DeskTooltip } from "../Tooltip/DeskTooltip";
 import { OFFICE_NAMES, OfficeName } from "../../constants/offices";
 import { useNavigate, useLocation } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
+import { useDebounce } from "../../hooks/useDebounce";
 
 interface LnbProps {
   desks: Desk[];
@@ -15,6 +16,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchText, setSearchText] = useState("");
+  const debouncedSearchText = useDebounce(searchText, 300);
   const [tooltipState, setTooltipState] = useState<{
     show: boolean;
     position: { x: number; y: number };
@@ -37,9 +39,9 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   // const { data: users } = useGetAllUsers();
 
   const filteredDesks = desks.filter((desk) => {
-    const searchLower = searchText.toLowerCase();
+    const searchLower = debouncedSearchText.toLowerCase();
 
-    if (searchText) {
+    if (debouncedSearchText) {
       return (
         (desk.occupant?.name?.toLowerCase().includes(searchLower) ||
           desk.occupant?.team?.toLowerCase().includes(searchLower)) &&
@@ -102,7 +104,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
           value={searchText}
           onChange={(value) => setSearchText(value)}
           placeholder="팀명 또는 이름으로 검색"
-          searchText={searchText}
+          searchText={debouncedSearchText}
           filteredDesks={filteredDesks}
           onDeskSelect={(desk, event) => handleDeskClick(desk, event)}
         />
