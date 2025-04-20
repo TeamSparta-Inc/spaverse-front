@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
 } from "react-router-dom";
 import { DefaultLayout } from "../components/Layout/DefaultLayout";
@@ -13,6 +14,10 @@ export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route element={<DefaultLayout />}>
+        <Route
+          path="/"
+          element={<Navigate to="/seating-chart/HQ12" replace />}
+        />
         <Route
           path="/seating-chart/:officeName"
           element={
@@ -30,6 +35,7 @@ export const router = createBrowserRouter(
             return null;
           }}
         />
+
         <Route
           path="/change-seats/:officeName"
           element={
