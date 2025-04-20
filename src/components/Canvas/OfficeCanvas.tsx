@@ -13,23 +13,25 @@ import {
 import { DeskTooltip } from "../Tooltip/DeskTooltip";
 
 interface OfficeCanvasProps {
-  rows?: number;
-  columns?: number;
+  columns: number;
+  rows: number;
   desks: Desk[];
   rooms: Room[];
-  selectedDeskId?: string | null;
+  selectedDeskId: string | null;
   setSelectedDeskId?: (deskId: string) => void;
-  isChangeSeatPage?: boolean;
+  isChangeSeatPage: boolean;
+  onCanvasReady?: (centerView: () => void) => void;
 }
 
 export const OfficeCanvas = ({
-  rows = 12,
-  columns = 16,
-  desks = [],
-  rooms = [],
+  columns,
+  rows,
+  desks,
+  rooms,
   selectedDeskId,
   setSelectedDeskId,
-  isChangeSeatPage = false,
+  isChangeSeatPage,
+  onCanvasReady,
 }: OfficeCanvasProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tooltipState, setTooltipState] = useState<{
@@ -42,7 +44,7 @@ export const OfficeCanvas = ({
     desk: null,
   });
 
-  const { appRef, pixiContainerRef, handleDeskClick } = usePixiApp(
+  const { appRef, pixiContainerRef, handleDeskClick, centerView } = usePixiApp(
     containerRef,
     setTooltipState,
     setSelectedDeskId
@@ -133,6 +135,12 @@ export const OfficeCanvas = ({
   useEffect(() => {
     draw();
   }, [desks, rows, columns, selectedDeskId, rooms]);
+
+  useEffect(() => {
+    if (onCanvasReady && centerView) {
+      onCanvasReady(centerView);
+    }
+  }, [onCanvasReady, centerView]);
 
   return (
     <div ref={containerRef} className="relative w-full h-full">

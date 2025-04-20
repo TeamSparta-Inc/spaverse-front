@@ -43,6 +43,15 @@ export const usePixiApp = (
     [onDeskClick]
   );
 
+  // 뷰를 중앙으로 리셋하는 함수 추가
+  const centerView = useCallback(() => {
+    if (!pixiContainerRef.current || !appRef.current) return;
+
+    // 컨테이너 위치를 초기화하여 중앙으로 이동
+    pixiContainerRef.current.position.x = 300;
+    pixiContainerRef.current.position.y = 100;
+  }, []);
+
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -146,5 +155,6 @@ export const usePixiApp = (
     appRef,
     pixiContainerRef,
     handleDeskClick,
+    centerView,
   };
 };
