@@ -1,10 +1,10 @@
+import { Button } from "@teamsparta/stack-button";
 import { toast } from "@teamsparta/stack-toast";
 import { Input, Modal } from "antd";
 import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { OfficeName } from "../../constants/offices";
 import { usePublishOffice } from "../../quries/office.query";
-
 export const Gnb = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -55,6 +55,18 @@ export const Gnb = () => {
     setInputValue(e.target.value);
   };
 
+  const handleChangeSeatClick = () => {
+    // window.confirm으로 기본 얼럿 표시
+    const isConfirmed = window.confirm(
+      `자리 편집 권한이 있는 팀원이신가요?\n승인 받지 않고 변경할 경우 세인님의 분노를 살 수 있습니다.`
+    );
+
+    // 확인 버튼을 눌렀을 때만 이동
+    if (isConfirmed && officeName) {
+      navigate(`/change-seats/${officeName}`);
+    }
+  };
+
   return (
     <>
       <nav className="sticky top-0 w-full h-[60px] bg-white border-b border-gray-200 flex items-center px-6 z-10">
@@ -67,23 +79,49 @@ export const Gnb = () => {
           </div>
           <div className="flex items-center gap-4">
             {isChangeSeatsPage ? (
-              <button
-                className="flex p-2 justify-center font-pretendard items-center gap-2.5 rounded-md bg-red-500 text-white hover:bg-red-600 text-[15px] leading-[22px] font-bold"
-                onClick={() => {
-                  showModal();
-                }}
-              >
-                최종 저장하기
-              </button>
+              <>
+                <Button
+                  variant="outline"
+                  colorScheme="secondary"
+                  size="sm"
+                  onClick={() => {
+                    navigate(`/seating-chart/${officeName}`);
+                  }}
+                >
+                  나가기
+                </Button>
+                <Button
+                  variant="solid"
+                  colorScheme="primary"
+                  size="sm"
+                  onClick={() => {
+                    showModal();
+                  }}
+                >
+                  최종 저장하기
+                </Button>
+              </>
             ) : (
-              <button
-                className="flex p-2 justify-center font-pretendard items-center gap-2.5 rounded-md bg-slate-100 text-gray-600 hover:text-gray-900 text-[15px] leading-[22px] font-bold"
-                onClick={() => {
-                  navigate(`/change-seats/${officeName}`);
-                }}
-              >
-                자리 바꾸기
-              </button>
+              <>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  colorScheme="secondary"
+                  onClick={() =>
+                    window.open("https://forms.gle/6mWTwDQC412joN7f9", "_blank")
+                  }
+                >
+                  의견 남기기
+                </Button>
+                <Button
+                  variant="solid"
+                  colorScheme="tertiary"
+                  size="sm"
+                  onClick={handleChangeSeatClick}
+                >
+                  자리 바꾸기
+                </Button>
+              </>
             )}
           </div>
         </div>

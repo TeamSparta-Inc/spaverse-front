@@ -13,6 +13,8 @@
     "@ant-design/icons": "^5.5.2",
     "@pixi/react": "7",
     "@tanstack/react-query": "^5.66.9",
+    "@teamsparta/stack-alert-modal": "^1.0.2",
+    "@teamsparta/stack-button": "^1.1.10",
     "@teamsparta/stack-core": "^1.0.4",
     "@teamsparta/stack-tag": "^0.1.2",
     "@teamsparta/stack-text": "^1.0.13",
