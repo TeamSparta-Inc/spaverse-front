@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from "react";
 import * as PIXI from "pixi.js";
 import { Desk } from "../types/desk";
+import { CANVAS_CONSTANTS } from "../constants/canvas";
 
 interface TooltipState {
   show: boolean;
@@ -42,6 +43,29 @@ export const usePixiApp = (
     },
     [onDeskClick]
   );
+
+  // 특정 책상으로 뷰를 이동하는 함수
+  const centerOnDesk = useCallback((desk: Desk) => {
+    if (!pixiContainerRef.current || !appRef.current || !containerRef.current)
+      return;
+
+    const { width, height } = containerRef.current.getBoundingClientRect();
+    const { CELL_WIDTH, CELL_HEIGHT } = CANVAS_CONSTANTS;
+
+    // 책상 위치 계산
+    const deskX = (desk.position.x - 3) * CELL_WIDTH;
+    const deskY = desk.position.y * CELL_HEIGHT;
+
+    // 화면 중앙으로 책상 이동
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    // 책상이 화면 중앙에 오도록 캔버스 위치 조정
+    pixiContainerRef.current.position.x =
+      centerX - deskX - (3 * CELL_WIDTH) / 2;
+    pixiContainerRef.current.position.y =
+      centerY - deskY - (2 * CELL_HEIGHT) / 2;
+  }, []);
 
   // 뷰를 중앙으로 리셋하는 함수 추가
   const centerView = useCallback(() => {
@@ -156,5 +180,6 @@ export const usePixiApp = (
     pixiContainerRef,
     handleDeskClick,
     centerView,
+    centerOnDesk,
   };
 };

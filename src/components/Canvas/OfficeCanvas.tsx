@@ -20,7 +20,10 @@ interface OfficeCanvasProps {
   selectedDeskId: string | null;
   setSelectedDeskId?: (deskId: string) => void;
   isChangeSeatPage: boolean;
-  onCanvasReady?: (centerView: () => void) => void;
+  onCanvasReady?: (
+    centerView: () => void,
+    centerOnDesk: (desk: Desk) => void
+  ) => void;
 }
 
 export const OfficeCanvas = ({
@@ -44,11 +47,13 @@ export const OfficeCanvas = ({
     desk: null,
   });
 
-  const { appRef, pixiContainerRef, handleDeskClick, centerView } = usePixiApp(
-    containerRef,
-    setTooltipState,
-    setSelectedDeskId
-  );
+  const {
+    appRef,
+    pixiContainerRef,
+    handleDeskClick,
+    centerView,
+    centerOnDesk,
+  } = usePixiApp(containerRef, setTooltipState, setSelectedDeskId);
 
   const scale = useZoomStore((state) => state.scale);
 
@@ -137,10 +142,10 @@ export const OfficeCanvas = ({
   }, [desks, rows, columns, selectedDeskId, rooms]);
 
   useEffect(() => {
-    if (onCanvasReady && centerView) {
-      onCanvasReady(centerView);
+    if (onCanvasReady && centerView && centerOnDesk) {
+      onCanvasReady(centerView, centerOnDesk);
     }
-  }, [onCanvasReady, centerView]);
+  }, [onCanvasReady, centerView, centerOnDesk]);
 
   return (
     <div ref={containerRef} className="relative w-full h-full">

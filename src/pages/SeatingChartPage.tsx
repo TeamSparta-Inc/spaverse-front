@@ -14,7 +14,6 @@ export const SeatingChartPage = () => {
 
   const handleDeskSelect = (deskId: string) => {
     setSelectedDeskId(deskId);
-    setScale(1.5); // 선택된 책상 확대
   };
 
   const { officeName } = useParams() as {

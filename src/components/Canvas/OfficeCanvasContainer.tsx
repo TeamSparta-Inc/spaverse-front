@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { useGetTempOffice, useGetFinalOffice } from "../../quries/office.query";
 import { OfficeCanvas } from "./OfficeCanvas";
 import { OfficeName } from "../../constants/offices";
+import { Desk } from "../../types/desk";
 
 interface OfficeCanvasContainerProps {
   selectedDeskId: string | null;
@@ -17,6 +18,7 @@ export const OfficeCanvasContainer = ({
 }: OfficeCanvasContainerProps) => {
   const { officeName } = useParams() as { officeName: OfficeName };
   const centerViewRef = useRef<(() => void) | null>(null);
+  const centerOnDeskRef = useRef<((desk: Desk) => void) | null>(null);
 
   // isChangeSeatPage에 따라 다른 API 사용
   const { data: officeData } = isChangeSeatPage
@@ -33,9 +35,25 @@ export const OfficeCanvasContainer = ({
     }
   }, [officeName]);
 
+  // 선택된 좌석 ID가 변경될 때 해당 좌석으로 화면 이동
+  useEffect(() => {
+    if (selectedDeskId && centerOnDeskRef.current) {
+      const selectedDesk = desks.find(
+        (desk) => desk.desk_unique_id === selectedDeskId
+      );
+      if (selectedDesk) {
+        centerOnDeskRef.current(selectedDesk);
+      }
+    }
+  }, [selectedDeskId, desks]);
+
   // centerView 함수를 저장하는 콜백
-  const handleCanvasReady = (centerView: () => void) => {
+  const handleCanvasReady = (
+    centerView: () => void,
+    centerOnDesk: (desk: Desk) => void
+  ) => {
     centerViewRef.current = centerView;
+    centerOnDeskRef.current = centerOnDesk;
   };
 
   return (

@@ -43,10 +43,10 @@ export const DeskTooltip = ({
   return (
     <div
       ref={tooltipRef}
-      className="fixed z-50 bg-white shadow-elevation-1 rounded-lg p-4 min-w-[200px] after:content-[''] after:absolute after:left-1/2 after:bottom-[-8px] after:-translate-x-1/2 after:border-8 after:border-transparent after:border-t-white"
+      className="fixed  z-50 bg-white shadow-elevation-1 rounded-lg p-4 after:content-[''] after:absolute after:left-1/2 after:bottom-[-8px] after:-translate-x-1/2 after:border-8 after:border-transparent after:border-t-white"
       style={tooltipStyle}
     >
-      <div className="flex gap-4">
+      <div className="flex gap-4 justify-between">
         <div className="w-[54px] h-[54px] bg-gray-100 overflow-hidden">
           {/* <div className="w-full h-full flex items-center justify-center bg-blue-40 text-white rounded">
             {occupant.name.charAt(0)}
@@ -67,7 +67,7 @@ export const DeskTooltip = ({
           )}
         </div>
         <div>
-          <div className="flex items-center justify-between">
+          <div className="flex gap-2 items-center justify-between">
             <Text as="p" font="subTitle2" color={vars.text.primary}>
               {occupant.name}
             </Text>
