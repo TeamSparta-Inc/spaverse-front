@@ -18,6 +18,24 @@ export const SearchBar = ({
   filteredDesks,
   onDeskSelect,
 }: SearchBarProps) => {
+  // 데스크의 층 정보를 가져오는 함수
+  const getOfficeName = (desk: Desk): string => {
+    const office = (desk.occupant as any)?.office;
+    // 층 이름을 사용자 친화적으로 변환
+    switch (office) {
+      case "HQ12":
+        return "본진 12층";
+      case "HQ13":
+        return "본진 13층";
+      case "FF9":
+        return "패스트파이브 9층";
+      case "FF10":
+        return "패스트파이브 10층";
+      default:
+        return office || "";
+    }
+  };
+
   return (
     <>
       <Input.Search
@@ -43,7 +61,10 @@ export const SearchBar = ({
                 onClick={(event) => onDeskSelect(desk, event)}
               >
                 {desk.occupant?.name}{" "}
-                <span className="text-[#81898F]">| {desk.occupant?.team}</span>
+                <span className="text-[#81898F]">
+                  | {desk.occupant?.team}
+                  {getOfficeName(desk) && ` | ${getOfficeName(desk)}`}
+                </span>
               </div>
             ))}
         </div>

@@ -1,11 +1,12 @@
-import { Suspense, useState } from "react";
-import { Desk, Team } from "../../types/desk";
+import { Suspense, useState, useEffect } from "react";
+import { Desk } from "../../types/desk";
 import { SearchBar } from "./SearchBar";
 import { DeskTooltip } from "../Tooltip/DeskTooltip";
 import { OFFICE_NAMES, OfficeName } from "../../constants/offices";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
 import { useDebounce } from "../../hooks/useDebounce";
+import { useGetAllDesks } from "../../quries/desk.query";
 
 interface LnbProps {
   desks: Desk[];
@@ -15,6 +16,7 @@ interface LnbProps {
 export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const params = useParams();
   const [searchText, setSearchText] = useState("");
   const debouncedSearchText = useDebounce(searchText, 300);
   const [tooltipState, setTooltipState] = useState<{
@@ -26,6 +28,8 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
     position: { x: 0, y: 0 },
     desk: null,
   });
+
+  // 현재 URL에서 선택된 층을 가져옵니다
   const [selectedOffice, setSelectedOffice] = useState<OfficeName | null>(
     () => {
       const path = location.pathname;
@@ -36,20 +40,51 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
     }
   );
 
-  // const { data: users } = useGetAllUsers();
+  // URL이 변경되면 selectedOffice 상태를 업데이트합니다
+  useEffect(() => {
+    const officeParam = params.officeName as OfficeName;
+    if (officeParam && officeParam !== selectedOffice) {
+      setSelectedOffice(officeParam);
+    }
+  }, [params.officeName]);
 
-  const filteredDesks = desks.filter((desk) => {
+  // 모든 층의 데스크 데이터를 가져옵니다
+  const { data: allDesks = [] } = useGetAllDesks();
+
+  // 현재 층과 전체 층 데스크를 합쳐서 검색 대상으로 사용 (중복 제거)
+  const searchTargetDesks = [...allDesks];
+
+  // 정확한 검색을 위한 필터링 로직
+  const filteredDesks = searchTargetDesks.filter((desk) => {
+    if (!debouncedSearchText) return false; // 검색어가 없으면 결과를 표시하지 않음
+
     const searchLower = debouncedSearchText.toLowerCase();
+    const name = desk.occupant?.name?.toLowerCase() || "";
+    const team = desk.occupant?.team?.toLowerCase() || "";
 
-    if (debouncedSearchText) {
-      return (
-        (desk.occupant?.name?.toLowerCase().includes(searchLower) ||
-          desk.occupant?.team?.toLowerCase().includes(searchLower)) &&
-        desk.occupant?.team !== ("Unknown Team" as Team)
-      );
+    // 1. 전체 이름이 정확히 일치하는 경우 (최우선)
+    if (name === searchLower) return true;
+
+    // 2. 성+이름 순서대로 포함되는 경우 (예: "김철수"를 검색하면 "김"으로 시작하고 "철수"가 포함)
+    const nameParts = searchLower.split("");
+    let nameMatches = true;
+    let lastIndex = -1;
+
+    for (const char of nameParts) {
+      const nextIndex = name.indexOf(char, lastIndex + 1);
+      if (nextIndex === -1) {
+        nameMatches = false;
+        break;
+      }
+      lastIndex = nextIndex;
     }
 
-    return true;
+    if (nameMatches) return true;
+
+    // 3. 팀명에 검색어가 포함되는 경우
+    if (team.includes(searchLower)) return true;
+
+    return false;
   });
 
   const handleDeskClick = (desk: Desk, event: React.MouseEvent) => {
@@ -60,19 +95,27 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
       desk,
     });
     onDeskSelect(desk.desk_unique_id);
+
+    // 데스크의 층 정보를 확인하고, 해당 층으로 이동
+    const office = desk.desk_unique_id.split("_")[0] as OfficeName;
+    if (office && office !== selectedOffice) {
+      console.log(`다른 층으로 이동: ${office}`);
+      handleOfficeClick(office);
+    }
   };
 
   const handleOfficeClick = (office: OfficeName) => {
+    console.log("handleOfficeClick 호출됨:", office);
     setSelectedOffice(office);
 
     // 현재 경로가 change-seat인지 seating-chart인지 확인
     const isChangeSeatPage = location.pathname.includes("/change-seats");
+    const targetPath = isChangeSeatPage
+      ? `/change-seats/${office}`
+      : `/seating-chart/${office}`;
 
-    if (isChangeSeatPage) {
-      navigate(`/change-seats/${office}`);
-    } else {
-      navigate(`/seating-chart/${office}`);
-    }
+    console.log("이동할 경로:", targetPath);
+    navigate(targetPath);
   };
 
   return (
@@ -103,7 +146,7 @@ export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
         <SearchBar
           value={searchText}
           onChange={(value) => setSearchText(value)}
-          placeholder="팀명 또는 이름으로 검색"
+          placeholder="팀명 또는 이름으로 검색 (전체 층)"
           searchText={debouncedSearchText}
           filteredDesks={filteredDesks}
           onDeskSelect={(desk, event) => handleDeskClick(desk, event)}
