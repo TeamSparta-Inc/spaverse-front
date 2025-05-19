@@ -9,11 +9,10 @@ import { useDebounce } from "../../hooks/useDebounce";
 import { useGetAllDesks } from "../../quries/desk.query";
 
 interface LnbProps {
-  desks: Desk[];
   onDeskSelect: (deskId: string) => void;
 }
 
-export const Lnb = ({ desks, onDeskSelect }: LnbProps) => {
+export const Lnb = ({ onDeskSelect }: LnbProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();

@@ -4,7 +4,6 @@ import { OfficeCanvasContainer } from "../components/Canvas/OfficeCanvasContaine
 import { Lnb } from "../components/Layout/Lnb";
 import { ZoomControls } from "../components/Layout/ZoomControls";
 import { OfficeName } from "../constants/offices";
-import { useGetFinalOffice } from "../quries/office.query";
 import { useZoomStore } from "../store/useZoomStore";
 export const SeatingChartPage = () => {
   const setScale = useZoomStore((state) => state.setScale);
@@ -19,9 +18,6 @@ export const SeatingChartPage = () => {
     officeName: OfficeName;
   };
 
-  const { data: finalOffice } = useGetFinalOffice(officeName);
-  const desks = finalOffice?.desks || [];
-
   // Set up an effect to center the view when officeName changes
   useEffect(() => {
     if (centerViewRef.current) {
@@ -32,7 +28,7 @@ export const SeatingChartPage = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Lnb desks={desks} onDeskSelect={handleDeskSelect} />
+      <Lnb onDeskSelect={handleDeskSelect} />
       <OfficeCanvasContainer
         selectedDeskId={selectedDeskId}
         setSelectedDeskId={setSelectedDeskId}
