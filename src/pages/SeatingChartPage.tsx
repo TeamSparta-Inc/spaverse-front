@@ -26,6 +26,21 @@ export const SeatingChartPage = () => {
     }
   }, [officeName, setScale]);
 
+  useEffect(() => {
+    const checkTimeAndRefresh = () => {
+      const now = new Date();
+      const hours = now.getHours();
+
+      if (hours >= 8 && hours <= 22) {
+        window.location.reload();
+      }
+    };
+
+    const intervalId = setInterval(checkTimeAndRefresh, 300000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Lnb onDeskSelect={handleDeskSelect} />
