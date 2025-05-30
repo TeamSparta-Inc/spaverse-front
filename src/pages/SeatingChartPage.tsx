@@ -26,6 +26,11 @@ export const SeatingChartPage = () => {
     }
   }, [officeName, setScale]);
 
+  // 페이지 로드 시 항상 줌 상태 초기화
+  useEffect(() => {
+    setScale(1);
+  }, [setScale]);
+
   useEffect(() => {
     const checkTimeAndRefresh = () => {
       const now = new Date();
