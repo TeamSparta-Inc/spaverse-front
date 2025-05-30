@@ -72,11 +72,7 @@ export const SeatingChartPage = () => {
         wheel={{ step: 0.25 }}
         doubleClick={{ disabled: true }}
       >
-        {({
-          zoomIn: wrapperZoomIn,
-          zoomOut: wrapperZoomOut,
-          resetTransform,
-        }) => (
+        {({ zoomIn: wrapperZoomIn, zoomOut: wrapperZoomOut }) => (
           <>
             <TransformComponent wrapperClass="flex-1 relative">
               <OfficeCanvasContainer
