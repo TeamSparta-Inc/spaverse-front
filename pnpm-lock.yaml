@@ -15,26 +15,26 @@ dependencies:
     specifier: ^5.66.9
     version: 5.68.0(react@18.3.1)
   '@teamsparta/stack-alert-modal':
-    specifier: ^1.0.2
-    version: 1.0.15(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+    specifier: 1.0.2
+    version: 1.0.2(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-font@1.0.2)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
   '@teamsparta/stack-button':
-    specifier: ^1.1.10
-    version: 1.2.5(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+    specifier: 1.1.10
+    version: 1.1.10(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
   '@teamsparta/stack-core':
-    specifier: ^1.0.4
-    version: 1.0.8(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+    specifier: 1.0.4
+    version: 1.0.4(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
   '@teamsparta/stack-tag':
-    specifier: ^0.1.2
+    specifier: 0.1.2
     version: 0.1.2(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
   '@teamsparta/stack-text':
-    specifier: ^1.0.13
-    version: 1.0.18(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+    specifier: 1.0.13
+    version: 1.0.13(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.4)(@teamsparta/stack-font@1.0.2)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
   '@teamsparta/stack-toast':
-    specifier: ^1.0.8
-    version: 1.0.15(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+    specifier: 1.0.8
+    version: 1.0.8(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
   '@teamsparta/stack-tokens':
-    specifier: ^1.1.0
-    version: 1.3.1(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+    specifier: 1.1.0
+    version: 1.1.0(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
   antd:
     specifier: ^5.22.7
     version: 5.24.3(react-dom@18.3.1)(react@18.3.1)
@@ -1850,12 +1850,11 @@ packages:
       react: 18.3.1
     dev: false
 
-  /@teamsparta/stack-alert-modal@1.0.15(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-aKnyzTLfbjf4x1njRGDkdF+GoxnXqdFYT7reMLIjTMERSeI/wZvtROICkp068Yvp/X+CUgA4qIpRIVXYOpiFlQ==}
+  /@teamsparta/stack-alert-modal@1.0.2(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-font@1.0.2)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-KKTB+XDykB0+BD2EX+KKgPU4m9uFSebV+Ug9zqqqftBHQ/FW3f9Az7KL+pdS0VxN1WKQMb0v5D8vsl330cpneg==}
     peerDependencies:
       '@emotion/react': ^11.11.1
       '@emotion/styled': ^11.11.0
-      '@teamsparta/stack-core': 1.0.16
       '@types/react': '*'
       '@types/react-dom': '*'
       react: ^16.8 || ^17.0 || ^18.0
@@ -1869,13 +1868,12 @@ packages:
       '@emotion/react': 11.14.0(@types/react@18.3.18)(react@18.3.1)
       '@emotion/styled': 11.14.0(@emotion/react@11.14.0)(@types/react@18.3.18)(react@18.3.1)
       '@radix-ui/react-dialog': 1.1.14(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-button': 1.2.5(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-core': 1.0.8(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-flex': 1.0.7(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-text': 1.0.18(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-tokens': 1.4.5(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-utils': 1.1.2(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-z-index': 1.0.1
+      '@teamsparta/stack-button': 1.1.10(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-core': 1.0.13(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-flex': 1.0.3(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.13)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-text': 1.0.13(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.13)(@teamsparta/stack-font@1.0.2)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-tokens': 1.4.3(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-utils': 1.1.1(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
       '@types/react': 18.3.18
       '@types/react-dom': 18.3.5(@types/react@18.3.18)
       motion: 12.15.0(react-dom@18.3.1)(react@18.3.1)
@@ -1883,14 +1881,14 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     transitivePeerDependencies:
       - '@emotion/is-prop-valid'
+      - '@teamsparta/stack-font'
     dev: false
 
-  /@teamsparta/stack-button@1.2.5(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-ZojHg2J3DHPGrXKzy3kmi53g1TegCqeCXGg/oxFXgilTaXYyqHuqoDGQuib0e0X30jEQdQIJr4xz464YXASd6A==}
+  /@teamsparta/stack-button@1.1.10(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-iQVUbOy/nu+3AowsBdgROShdx6DIlAG4ZnEb98YqywlugciQmfJznRbjzw0ssnOpMoTFzTyjgM4c6DE9sfMgJw==}
     peerDependencies:
       '@emotion/react': ^11.11.1
       '@emotion/styled': ^11.11.0
-      '@teamsparta/stack-core': 1.0.16
       '@types/react': '*'
       '@types/react-dom': '*'
       react: ^16.8 || ^17.0 || ^18.0
@@ -1903,12 +1901,11 @@ packages:
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.18)(react@18.3.1)
       '@emotion/styled': 11.14.0(@emotion/react@11.14.0)(@types/react@18.3.18)(react@18.3.1)
-      '@teamsparta/stack-core': 1.0.8(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-font': 2.0.0
-      '@teamsparta/stack-icons': 1.1.0(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-spinner': 1.0.2(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-tokens': 1.4.5(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-utils': 1.1.2(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-core': 1.0.13(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-font': 1.0.2(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-icons': 1.0.11(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-tokens': 1.4.3(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-utils': 1.1.1(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
       '@types/react': 18.3.18
       '@types/react-dom': 18.3.5(@types/react@18.3.18)
       react: 18.3.1
@@ -1936,8 +1933,8 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@teamsparta/stack-core@1.0.8(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-9ElfZ8ZxEB1NeqqCgQe75iZrgX/dVa14PHyrBJS8oPQPz36fuB/pmmNqPcIIPo4am8uQIhRF8nF83Yy0LtbP4Q==}
+  /@teamsparta/stack-core@1.0.4(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-+1UPaGEYnulCuXGITvGisw0mGRIC7CqM0k6lT15AchCslLX2rCbSFrgTE2CI32QlqaS1wijxiTRyeyeYz55IYg==}
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -1949,20 +1946,20 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@teamsparta/stack-tokens': 1.3.1(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-utils': 1.0.0(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-tokens': 1.1.0(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-utils': 1.1.2(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
       '@types/react': 18.3.18
       '@types/react-dom': 18.3.5(@types/react@18.3.18)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@teamsparta/stack-flex@1.0.7(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-Jv3UtDWtw/9rrCFg4b/KaTSmmcv0nshFPSarZaJfdaME6c5GY8e1cfdc18E3f6546DYxNyXBrqOLY7ZR5fj8jQ==}
+  /@teamsparta/stack-flex@1.0.3(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.13)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-rkysqQgnFg6WmFKe0YJ4rGta06L6HMxGLpcKNfdtOG/3kRHbjC+7RBkQLpYs9UeDqjqiwylLFO4FNW3yO/ERQQ==}
     peerDependencies:
       '@emotion/react': ^11.11.1
       '@emotion/styled': ^11.11.0
-      '@teamsparta/stack-core': 1.0.16
+      '@teamsparta/stack-core': 1.0.13
       '@types/react': '*'
       '@types/react-dom': '*'
       react: ^16.8 || ^17.0 || ^18.0
@@ -1975,7 +1972,7 @@ packages:
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.18)(react@18.3.1)
       '@emotion/styled': 11.14.0(@emotion/react@11.14.0)(@types/react@18.3.18)(react@18.3.1)
-      '@teamsparta/stack-core': 1.0.8(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-core': 1.0.13(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
       '@teamsparta/stack-utils': 1.1.2(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
       '@types/react': 18.3.18
       '@types/react-dom': 18.3.5(@types/react@18.3.18)
@@ -1983,8 +1980,27 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@teamsparta/stack-font@2.0.0:
-    resolution: {integrity: sha512-eDviEHPpeRHOf/BgPVnuODMaE2EMWcRCWFLAvu3YdwNUeyRlif+/30RUiyo/NHuLa0g5Cj6f1iJNPmwjKz/e1Q==}
+  /@teamsparta/stack-font@1.0.2(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-gWIzI4thoykTuvI+rumqRvBWJhT/CzNH5c+pL3M8VZfWPSjbatCvgf0HSpbRuj6HyLEZtblCLP9bmITfJtxSBg==}
+    peerDependencies:
+      '@emotion/react': ^11.11.1
+      '@emotion/styled': ^11.11.0
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@emotion/react': 11.14.0(@types/react@18.3.18)(react@18.3.1)
+      '@emotion/styled': 11.14.0(@emotion/react@11.14.0)(@types/react@18.3.18)(react@18.3.1)
+      '@types/react': 18.3.18
+      '@types/react-dom': 18.3.5(@types/react@18.3.18)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /@teamsparta/stack-icons@1.0.11(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
@@ -2001,54 +2017,6 @@ packages:
         optional: true
     dependencies:
       '@teamsparta/stack-tokens': 1.4.3(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@types/react': 18.3.18
-      '@types/react-dom': 18.3.5(@types/react@18.3.18)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-    dev: false
-
-  /@teamsparta/stack-icons@1.1.0(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-Hr7s1HLbS4yruVjehRbhQD6hcmowojidWrfCsoR4wDUNHUuZI2SEOzE5b+gy4y5zV/JuRt5A+4ETU2WavkqJzQ==}
-    peerDependencies:
-      '@types/react': '*'
-      '@types/react-dom': '*'
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-    dependencies:
-      '@teamsparta/stack-tokens': 1.4.5(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@types/react': 18.3.18
-      '@types/react-dom': 18.3.5(@types/react@18.3.18)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-    dev: false
-
-  /@teamsparta/stack-spinner@1.0.2(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-IhwOl24OgxtkwUbZA87HZOTqZLNvOHHHNMd0aDX/X+wVUsM8ZdVaxy69eQyCWTuQSgmjy50tRCDsJX5bisGaKw==}
-    peerDependencies:
-      '@emotion/react': ^11.11.1
-      '@emotion/styled': ^11.11.0
-      '@teamsparta/stack-core': 1.0.16
-      '@types/react': '*'
-      '@types/react-dom': '*'
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-    dependencies:
-      '@emotion/react': 11.14.0(@types/react@18.3.18)(react@18.3.1)
-      '@emotion/styled': 11.14.0(@emotion/react@11.14.0)(@types/react@18.3.18)(react@18.3.1)
-      '@teamsparta/stack-core': 1.0.8(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-flex': 1.0.7(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-tokens': 1.4.5(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-utils': 1.1.2(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
       '@types/react': 18.3.18
       '@types/react-dom': 18.3.5(@types/react@18.3.18)
       react: 18.3.1
@@ -2082,12 +2050,13 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@teamsparta/stack-text@1.0.18(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-9aoLe5c2goX8ItA+Ddi6dp9t/ry30j7OHid33GJlurQFrZNkvW5WpTdPRPr5M/Xd91//eUFt7ZS6sk0+Oj1zVA==}
+  /@teamsparta/stack-text@1.0.13(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.13)(@teamsparta/stack-font@1.0.2)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-BCZwsCXlioCQ9WP23C6jXgN7Ua6NM/VATo97LGLZDumrf4rJOR1tX6uF9Yx0pmI6L4+9k2dEhjS3idCU9JcNlA==}
     peerDependencies:
       '@emotion/react': ^11.11.1
       '@emotion/styled': ^11.11.0
-      '@teamsparta/stack-core': 1.0.16
+      '@teamsparta/stack-core': 1.0.13
+      '@teamsparta/stack-font': 1.0.2
       '@types/react': '*'
       '@types/react-dom': '*'
       react: ^16.8 || ^17.0 || ^18.0
@@ -2100,21 +2069,22 @@ packages:
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.18)(react@18.3.1)
       '@emotion/styled': 11.14.0(@emotion/react@11.14.0)(@types/react@18.3.18)(react@18.3.1)
-      '@teamsparta/stack-core': 1.0.8(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-font': 2.0.0
-      '@teamsparta/stack-utils': 1.1.2(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-core': 1.0.13(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-font': 1.0.2(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-utils': 1.1.1(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
       '@types/react': 18.3.18
       '@types/react-dom': 18.3.5(@types/react@18.3.18)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@teamsparta/stack-toast@1.0.15(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-5bwQh90aqpG1ZhvlYv7uoAfmuPeZ9Pa4M+CCSKuoPfg/Yl4JhKrqJ6ttnDFyujHFjTZdruZsj5S8sANnMPKjlg==}
+  /@teamsparta/stack-text@1.0.13(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.4)(@teamsparta/stack-font@1.0.2)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-BCZwsCXlioCQ9WP23C6jXgN7Ua6NM/VATo97LGLZDumrf4rJOR1tX6uF9Yx0pmI6L4+9k2dEhjS3idCU9JcNlA==}
     peerDependencies:
       '@emotion/react': ^11.11.1
       '@emotion/styled': ^11.11.0
-      '@teamsparta/stack-core': 1.0.16
+      '@teamsparta/stack-core': 1.0.13
+      '@teamsparta/stack-font': 1.0.2
       '@types/react': '*'
       '@types/react-dom': '*'
       react: ^16.8 || ^17.0 || ^18.0
@@ -2127,13 +2097,39 @@ packages:
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.18)(react@18.3.1)
       '@emotion/styled': 11.14.0(@emotion/react@11.14.0)(@types/react@18.3.18)(react@18.3.1)
-      '@teamsparta/stack-core': 1.0.8(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-flex': 1.0.7(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-font': 2.0.0
-      '@teamsparta/stack-icons': 1.1.0(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-text': 1.0.18(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.8)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-tokens': 1.4.5(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
-      '@teamsparta/stack-utils': 1.1.2(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-core': 1.0.4(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-font': 1.0.2(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-utils': 1.1.1(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@types/react': 18.3.18
+      '@types/react-dom': 18.3.5(@types/react@18.3.18)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
+  /@teamsparta/stack-toast@1.0.8(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-e8rdXF1l/W5bHkfqfP34VUanjFC0Bvcr9Gp1JWhP6nAVVsWIxY7XCjJvnseRBR7mgCJW4gVQFZu29UGPlTV4LQ==}
+    peerDependencies:
+      '@emotion/react': ^11.11.1
+      '@emotion/styled': ^11.11.0
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@emotion/react': 11.14.0(@types/react@18.3.18)(react@18.3.1)
+      '@emotion/styled': 11.14.0(@emotion/react@11.14.0)(@types/react@18.3.18)(react@18.3.1)
+      '@teamsparta/stack-core': 1.0.13(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-flex': 1.0.3(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.13)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-font': 1.0.2(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-icons': 1.0.11(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-text': 1.0.13(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@teamsparta/stack-core@1.0.13)(@teamsparta/stack-font@1.0.2)(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-tokens': 1.4.3(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
+      '@teamsparta/stack-utils': 1.1.1(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1)
       '@teamsparta/utils': 1.9.0
       '@types/react': 18.3.18
       '@types/react-dom': 18.3.5(@types/react@18.3.18)
@@ -2141,8 +2137,8 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@teamsparta/stack-tokens@1.3.1(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-CFWgEBq/MGNRerXqlJV9pUTDqBqmrZXnyZrtZZ8AG6E3Uk9bYnFLspADBwcLDyTAVu07yt4OlMmmywt6b5RQbw==}
+  /@teamsparta/stack-tokens@1.1.0(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-fpv1kG5AbIvBP/hzwDXu5x5uSd5EWuLb047SlIklLB9jMyzZiyD8jIJ2aZuU6t7B98hjHTMvZ8GdRdJch2Qg8A==}
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -2177,45 +2173,6 @@ packages:
       '@types/react': 18.3.18
       '@types/react-dom': 18.3.5(@types/react@18.3.18)
       deepmerge: 4.3.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-    dev: false
-
-  /@teamsparta/stack-tokens@1.4.5(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-5pzGPdy4AmzriUHi/bdRcLyvmVWbh1FvupFDLXfZGmRPQpi79k0Hf20dPwEnwZtRztIRkl395C/aJp0+b0xmXQ==}
-    peerDependencies:
-      '@types/react': '*'
-      '@types/react-dom': '*'
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-    dependencies:
-      '@types/react': 18.3.18
-      '@types/react-dom': 18.3.5(@types/react@18.3.18)
-      deepmerge: 4.3.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-    dev: false
-
-  /@teamsparta/stack-utils@1.0.0(@types/react-dom@18.3.5)(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-zRCQEwVxY4yWH1yN0ZLrXhgzBNtndyob+x5QB849dtXc0j/i6ZRUfCUdGs5UJiq4BtieftIJOxSK3QIRc3kroQ==}
-    peerDependencies:
-      '@types/react': '*'
-      '@types/react-dom': '*'
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-    dependencies:
-      '@types/react': 18.3.18
-      '@types/react-dom': 18.3.5(@types/react@18.3.18)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
@@ -2256,10 +2213,6 @@ packages:
       '@types/react-dom': 18.3.5(@types/react@18.3.18)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-    dev: false
-
-  /@teamsparta/stack-z-index@1.0.1:
-    resolution: {integrity: sha512-aMg8oHzOGzStAjbUmj0aySz+glosuIdmmjsUc6Dj2GyiIDvgW5PmbRAUjsr5GrNeoCTmJ+segDrg61XwGGecBg==}
     dev: false
 
   /@teamsparta/utils@1.9.0:
