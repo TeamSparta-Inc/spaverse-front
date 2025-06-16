@@ -141,7 +141,7 @@ export const TEAM_COLORS: Record<string, { primary: string }> = {
     primary: "#FF9896", // 8. 살몬 핑크
   },
   "그로스 마케팅팀": {
-    primary: "#BCBD22", // 9. 라임
+    primary: "#8E44AD", // 9. 라임
   },
   "B2G 교육기획팀": {
     primary: "#9EDAe5", // 10. 민트
@@ -174,10 +174,10 @@ export const TEAM_COLORS: Record<string, { primary: string }> = {
     primary: "#1ABC9C", // 19. 다크 민트
   },
   디자인팀: {
-    primary: "#8E44AD", // 20. 다크 퍼플
+    primary: "#BCBD22", // 20. 다크 퍼플
   },
   "-": {
-    primary: "#9DA7AE",
+    primary: "#141617",
   },
 };
 
