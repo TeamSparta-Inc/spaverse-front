@@ -117,64 +117,64 @@ export const createDeskText = (
 
 export const TEAM_COLORS: Record<string, { primary: string }> = {
   B2B팀: {
-    primary: "#FF8026",
+    primary: "#1F77B4", // 1. 다크 블루
   },
   재무팀: {
-    primary: "#ACF2AC",
+    primary: "#FF7F0E", // 2. 오렌지
   },
   스튜디오팀: {
-    primary: "#A5456B",
+    primary: "#17BECF", // 3. 청록
   },
   게임팀: {
-    primary: "#FFBAC4",
+    primary: "#FFD700", // 4. 골드
   },
   PM팀: {
-    primary: "#008000",
+    primary: "#9467BD", // 5. 퍼플
   },
   "B2C 교육운영팀": {
-    primary: "#82E8DE",
+    primary: "#8C564B", // 6. 올리브
   },
   "브랜드 콘텐츠팀": {
-    primary: "#FFBE8F",
+    primary: "#AEC7E8", // 7. 스카이블루
   },
   피플팀: {
-    primary: "#26CE75",
+    primary: "#FF9896", // 8. 살몬 핑크
   },
   "그로스 마케팅팀": {
-    primary: "#FFDEA6",
+    primary: "#BCBD22", // 9. 라임
   },
   "B2G 교육기획팀": {
-    primary: "#1F94DC",
+    primary: "#9EDAe5", // 10. 민트
   },
   "KDT 커리어개발팀": {
-    primary: "#681FDC",
+    primary: "#2C3E50", // 11. 네이비
   },
   "KDT 교육운영팀": {
-    primary: "#BED417",
+    primary: "#E67E22", // 12. 진한 오렌지
   },
   CX팀: {
-    primary: "#BC50E4",
+    primary: "#2980B9", // 13. 코발트 블루
   },
   일본팀: {
-    primary: "#37A28C",
+    primary: "#D62728", // 14. 마젠타
   },
   "B2C 교육기획팀": {
-    primary: "#681FDC",
+    primary: "#7F8C8D", // 15. 카키
   },
   외주팀: {
-    primary: "#A54E0B",
+    primary: "#C39BD3", // 16. 연보라
   },
   세일즈팀: {
-    primary: "#DC1F87",
+    primary: "#E74C3C", // 17. 버밀리언
   },
   "콘텐츠 프로듀싱팀": {
-    primary: "#1D519F",
+    primary: "#5DADE2", // 18. 아쿠아 블루
   },
   개발팀: {
-    primary: "#EF4444",
+    primary: "#1ABC9C", // 19. 다크 민트
   },
   디자인팀: {
-    primary: "#2E47",
+    primary: "#8E44AD", // 20. 다크 퍼플
   },
   "-": {
     primary: "#9DA7AE",
